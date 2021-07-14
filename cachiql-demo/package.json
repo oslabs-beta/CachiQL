@@ -1,0 +1,47 @@
+{
+  "name": "cachiql-demo",
+  "version": "1.0.0",
+  "description": "Create the demo of the cachiql module",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=PRODUCTION node ../server/index.js",
+    "build": "cross-env NODE_ENV=PRODUCTION webpack",
+    "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --open --hot \" \"nodemon ./server/server.js\"",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oslabs-beta/CachiQL.git"
+  },
+  "author": "Vanessa Lutz, Fahad Shaikh, Eddy Zapata, Kaden Johnson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/CachiQL/issues"
+  },
+  "homepage": "https://github.com/oslabs-beta/CachiQL#readme",
+  "dependencies": {
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "apollo-server-express": "^3.0.0",
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "concurrently": "^6.2.0",
+    "cross-env": "^7.0.3",
+    "express": "^4.17.1",
+    "graphql": "^15.5.1",
+    "html-webpack-plugin": "^5.3.2",
+    "postgres": "^1.0.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "webpack": "^5.44.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
