@@ -14,5 +14,10 @@
   "rules": {
     "no-console": "off",
     "prettier/prettier": 2
-  }
+  },
+  "ignorePatterns": [
+    "dist/*",
+    "node-modules",
+    "webpack.config.js"
+  ]
 }

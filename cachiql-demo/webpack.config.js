@@ -1,9 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable */
-//import webpack from 'webpack';
-// import path from 'path';
-// import HtmlWebpackPlugin from 'html-webpack-plugin';
-
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
