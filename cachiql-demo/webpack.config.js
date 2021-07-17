@@ -1,8 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const webpack = require('webpack');
+
 
 module.exports = {
-  entry: './src/client/index.tsx',
+  entry: ['@babel/polyfill','./src/client/index.tsx'],
   mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -37,13 +40,39 @@ module.exports = {
             ]
           }
         }
-      }
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
+      {
+        test: /\.(gif|png|jpe?g)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true,
+              disable: true,
+              webp: {
+                quality: 75,
+              }
+            }
+          }
+        ]
+      },
+      {
+        test: /\.[sac]ss$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/client/index.html'
-    })
+    }),
+    new MiniCssExtractPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
