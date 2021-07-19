@@ -14,23 +14,23 @@ export const FloatNavigationMenuStyle = React.memo(
         <NavMenu gutter={1} useStyles={useFloatNavigationMenuStyles}>
           <NavItem active>
             <AutorenewIcon />
-            Magical CachiQL
+            MAGICAL CACHiQL
           </NavItem>
           <NavItem>
             <GitHubIcon />
-            NPM Package
+            NPM PACKAGE
           </NavItem>
           <NavItem>
             <OndemandVideoIcon />
-            Demo
+            DEMO
           </NavItem>
           <NavItem>
             <RateReviewIcon />
-            Reviews
+            REVIEWS
           </NavItem>
           <NavItem>
             <InfoIcon />
-            About Us
+            ABOUT US
           </NavItem>
         </NavMenu>
       </>
