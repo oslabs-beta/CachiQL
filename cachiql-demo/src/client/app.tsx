@@ -8,7 +8,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import CachiQLLogo from '../../dist/assets/cachiql_(1).svg';
 import { makeStyles } from '@material-ui/core/styles';
-import { Metrics } from './Components/Metrics'
+import { Metrics } from './Components/Metrics';
+import { Queries } from './Components/Queries';
 import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
@@ -47,12 +48,18 @@ const App = () => {
               <BuildBarChart />
             </Paper>
           </Grid>
-                      {/* Metrics */}
-                      <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Metrics />
-              </Paper>
-            </Grid>
+          {/* Metrics */}
+          <Grid item xs={12} md={4} lg={3}>
+            <Paper className={fixedHeightPaper}>
+              <Metrics />
+            </Paper>
+          </Grid>
+          {/* Recent Queries */}
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <Queries />
+            </Paper>
+          </Grid>
         </Grid>
       </Container>
     </div>
