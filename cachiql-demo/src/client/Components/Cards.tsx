@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '56.25%' // 16:9
   },
   cardContent: {
-    
     flexGrow: 1
   },
   playIcon: {
@@ -37,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const cards = [1, 2, 3];
 export const WhyCachiQL = () => {
   const classes = useStyles();
   return (
@@ -49,7 +47,7 @@ export const WhyCachiQL = () => {
           <Grid item key={1} xs={12} sm={6} md={4}>
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
-                  <AutorenewIcon className={classes.playIcon} />
+                <AutorenewIcon className={classes.playIcon} />
                 <Typography gutterBottom variant="h5" component="h2">
                   The Magic of CachiQL
                 </Typography>

@@ -5,10 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import CachiQLLogo from '../../assets/cachiql_(1)-svg_(2).svg';
-import { keyframes } from 'styled-components';
 import Paper from '@material-ui/core/Paper';
-import clsx from "clsx";
-
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -26,27 +23,25 @@ const useStyles = makeStyles((theme) => ({
     transform: 'scale(0.5)'
   },
   i: {
-      position: 'absolute',
-      background: '#fff',
-      borderRadius: '50%',
-      animation: "$animate linear infinite",
+    position: 'absolute',
+    background: '#fff',
+    borderRadius: '50%',
+    animation: '$animate linear infinite'
   },
-  "@keyframes animate": {
-    "0%": {
+  '@keyframes animate': {
+    '0%': {
       opacity: 0,
       transform: 'translateY(0)'
     },
-    "10%, 90%": {
+    '10%, 90%': {
       opacity: 1
     },
-    "100%": {
+    '100%': {
       opacity: 0,
       transform: 'translateY(-100px)'
-    },
+    }
   }
- 
 }));
-
 
 export const Banner = () => {
   const classes = useStyles();
@@ -57,7 +52,7 @@ export const Banner = () => {
       width: `${1 + size}px`,
       height: `${1 + size}px`,
       animationDuration: `${5 + duration}s`,
-      animationDelay: `${1 + duration}s`,
+      animationDelay: `${1 + duration}s`
     };
     return <i style={style} className={classes.i}></i>;
   };
@@ -78,16 +73,15 @@ export const Banner = () => {
     <React.Fragment>
       <CssBaseline />
       <main>
-
         {/* Hero unit */}
         <Paper className={classes.heroContent}>
           <Grid container>
-         <Grid item xs={2}>
-            {makeStars()}
-            <CachiQLLogo className={classes.svg_icons} />
+            <Grid item xs={2}>
+              {makeStars()}
+              <CachiQLLogo className={classes.svg_icons} />
             </Grid>
-            </Grid>
-            </Paper>
+          </Grid>
+        </Paper>
       </main>
     </React.Fragment>
   );
