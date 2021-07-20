@@ -6,6 +6,8 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import CachiQLLogo from '../../assets/cachiql_(1)-svg_(2).svg';
 import { keyframes } from 'styled-components';
+import Paper from '@material-ui/core/Paper';
+import clsx from "clsx";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,8 +29,21 @@ const useStyles = makeStyles((theme) => ({
       position: 'absolute',
       background: '#fff',
       borderRadius: '50%',
-      animation: 'animate linear infinite',
+      animation: "$animate linear infinite",
   },
+  "@keyframes animate": {
+    "0%": {
+      opacity: 0,
+      transform: 'translateY(0)'
+    },
+    "10%, 90%": {
+      opacity: 1
+    },
+    "100%": {
+      opacity: 0,
+      transform: 'translateY(-100px)'
+    },
+  }
  
 }));
 
@@ -41,6 +56,8 @@ export const Banner = () => {
       top: `${y}px`,
       width: `${1 + size}px`,
       height: `${1 + size}px`,
+      animationDuration: `${5 + duration}s`,
+      animationDelay: `${1 + duration}s`,
     };
     return <i style={style} className={classes.i}></i>;
   };
@@ -48,8 +65,8 @@ export const Banner = () => {
     let i = 0;
     const starArr = new Array(500);
     while (i < starArr.length) {
-      const x = Math.floor(Math.random() * 100);
-      const y = Math.floor(Math.random() * 100);
+      const x = Math.floor(Math.random() * 2000);
+      const y = Math.floor(Math.random() * 2000);
       const duration = Math.random() * 10;
       const size = Math.random() * 2;
       starArr[i] = <Star {...{ x, y, duration, size }} />;
@@ -57,18 +74,20 @@ export const Banner = () => {
     }
     return starArr;
   };
-  console.log("Did I make a star?", makeStars())
   return (
     <React.Fragment>
       <CssBaseline />
       <main>
+
         {/* Hero unit */}
-        <div className={classes.heroContent}>
-          <Container maxWidth="xs">
+        <Paper className={classes.heroContent}>
+          <Grid container>
+         <Grid item xs={2}>
             {makeStars()}
             <CachiQLLogo className={classes.svg_icons} />
-          </Container>
-        </div>
+            </Grid>
+            </Grid>
+            </Paper>
       </main>
     </React.Fragment>
   );

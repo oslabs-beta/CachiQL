@@ -12,6 +12,7 @@ import { Metrics } from './Components/Metrics';
 import { Queries } from './Components/Queries';
 import clsx from 'clsx';
 import { Banner } from './Components/Banner';
+import { WhyCachiQL } from './Components/Cards'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column'
   },
   fixedHeight: {
-    height: 240
+    height: 380
   }
 }));
 
@@ -38,9 +39,9 @@ const App = () => {
   return (
     <div>
       <CssBaseline />
-      <h1>Welcome to CachiQL</h1>
       <FloatNavigationMenuStyle />
       <Banner />
+      <WhyCachiQL />
       <Graphiql />
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>
