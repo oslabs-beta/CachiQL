@@ -11,6 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Metrics } from './Components/Metrics';
 import { Queries } from './Components/Queries';
 import clsx from 'clsx';
+import { Banner } from './Components/Banner';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,6 +40,7 @@ const App = () => {
       <CssBaseline />
       <h1>Welcome to CachiQL</h1>
       <FloatNavigationMenuStyle />
+      <Banner />
       <Graphiql />
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>

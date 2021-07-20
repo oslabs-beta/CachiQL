@@ -82,8 +82,8 @@ export const BuildBarChart = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="pv" fill="#8884d8" />
-          <Bar dataKey="uv" fill="#82ca9d" />
+          <Bar dataKey="uv" fill="#8884d8" />
+          <Bar dataKey="pv" fill="#82ca9d" />
         </BarChart>
       </BarStyle>
     </>
