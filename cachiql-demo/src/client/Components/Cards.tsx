@@ -42,6 +42,19 @@ export const WhyCachiQL = () => {
     <React.Fragment>
       <CssBaseline />
       <Container className={classes.cardGrid} maxWidth="lg">
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <Card className={classes.card}>
+              <CardContent className={classes.cardContent}>
+                <Typography variant="h2" component="h2" fontWeight="bold" emphasis="high">
+                  SOLVING THE N+1 ISSUE OF GRAPHQL
+              </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </Container>
+      <Container className={classes.cardGrid} maxWidth="lg">
         {/* End hero unit */}
         <Grid container spacing={5}>
           <Grid item key={1} xs={12} sm={6} md={4}>
@@ -52,7 +65,8 @@ export const WhyCachiQL = () => {
                   The Magic of CachiQL
                 </Typography>
                 <Typography>
-                  Store, access and maintain deeply-nested GraphQL queries with CachiQL.
+                  Store, access and maintain deeply-nested GraphQL queries with
+                  CachiQL.
                 </Typography>
               </CardContent>
             </Card>
@@ -60,12 +74,13 @@ export const WhyCachiQL = () => {
           <Grid item key={2} xs={12} sm={6} md={4}>
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
-              <QueryBuilderIcon className={classes.playIcon} />
+                <QueryBuilderIcon className={classes.playIcon} />
                 <Typography gutterBottom variant="h5" component="h2">
                   Saving Time
                 </Typography>
                 <Typography>
-                  Leveraging the power of Redis to rapidly return previously cached GraphQL queries.
+                  Leveraging the power of Redis to rapidly return previously
+                  cached GraphQL queries.
                 </Typography>
               </CardContent>
             </Card>
@@ -73,12 +88,13 @@ export const WhyCachiQL = () => {
           <Grid item key={3} xs={12} sm={6} md={4}>
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
-              <CodeIcon className={classes.playIcon} />
+                <CodeIcon className={classes.playIcon} />
                 <Typography gutterBottom variant="h5" component="h2">
                   Documentation
                 </Typography>
                 <Typography>
-                  CachiQL is a well-documented, light-weight, open source library, built for performance.
+                  CachiQL is a well-documented, light-weight, open source
+                  library, built for performance.
                 </Typography>
               </CardContent>
             </Card>

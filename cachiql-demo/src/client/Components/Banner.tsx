@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import CachiQLLogo from '../../assets/cachiql_(1)-svg_(2).svg';
+import CachiQLLogo from '../../assets/white1024.svg';
 import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     position: 'relative',
     width: '100%',
-    height: '100vh',
     background: 'linear-gradient(#111425,#3751e0)',
     padding: theme.spacing(8, 0, 6),
     backgroundAttachment: 'fixed',
