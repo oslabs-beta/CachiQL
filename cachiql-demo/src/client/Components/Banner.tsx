@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     position: 'relative',
     width: '100%',
-    height: '100vh',
     background: 'linear-gradient(#111425,#3751e0)',
     padding: theme.spacing(8, 0, 6),
     backgroundAttachment: 'fixed',
@@ -20,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box'
   },
   svg_icons: {
-    transform: 'scale(1.0)'
+    transform: 'scale(0.5)'
   },
   i: {
     position: 'absolute',

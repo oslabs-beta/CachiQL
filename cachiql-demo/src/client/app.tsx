@@ -14,6 +14,7 @@ import clsx from 'clsx';
 import { Banner } from './Components/Banner';
 import { WhyCachiQL } from './Components/Cards';
 import { Demo } from './Components/Demologo';
+import Stepper from './Components/Stepper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +48,11 @@ const App = () => {
       <Graphiql />
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>
+        <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <Stepper />
+            </Paper>
+          </Grid>
           {/* BuildBarChart */}
           <Grid item xs={12} md={8} lg={9}>
             <Paper className={fixedHeightPaper}>
