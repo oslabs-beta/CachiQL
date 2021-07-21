@@ -12,7 +12,8 @@ import { Metrics } from './Components/Metrics';
 import { Queries } from './Components/Queries';
 import clsx from 'clsx';
 import { Banner } from './Components/Banner';
-import { WhyCachiQL } from './Components/Cards'
+import { WhyCachiQL } from './Components/Cards';
+import { Demo } from './Components/Demologo';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,6 +43,7 @@ const App = () => {
       <FloatNavigationMenuStyle />
       <Banner />
       <WhyCachiQL />
+      <Demo />
       <Graphiql />
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>

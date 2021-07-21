@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import CachiQLLogo from '../../assets/cachiql_(1)-svg_(2).svg';
+import CachiQLLogo from '../../assets/white1024.svg';
 import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box'
   },
   svg_icons: {
-    transform: 'scale(0.5)'
+    transform: 'scale(1.0)'
   },
   i: {
     position: 'absolute',
