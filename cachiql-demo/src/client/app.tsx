@@ -1,7 +1,7 @@
 import React from 'react';
-import { FloatNavigationMenuStyle } from './Components/Navigation'
-import { Graphiql } from './Components/GraphiQL'
-import CachiQLLogo from '../../dist/assets/cachiql_(1).svg'
+import { FloatNavigationMenuStyle } from './Components/Navigation';
+import { Graphiql } from './Components/GraphiQL';
+import CachiQLLogo from '../../dist/assets/cachiql_(1).svg';
 
 
 const App = () => (
