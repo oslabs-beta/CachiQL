@@ -5,7 +5,7 @@ const webpack = require('webpack');
 
 
 module.exports = {
-  entry: ['@babel/polyfill','./src/client/index.tsx'],
+  entry: ['@babel/polyfill', './src/client/index.tsx'],
   mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -21,6 +21,9 @@ module.exports = {
     inline: true,
     proxy: {
       '/': {
+        target: 'http://localhost:3000'
+      },
+      '/graphql': {
         target: 'http://localhost:3000'
       }
     }
