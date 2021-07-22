@@ -46,7 +46,7 @@ export const WhyCachiQL = () => {
           <Grid item xs={12}>
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
-                <Typography variant="h2" component="h2" fontWeight="bold" emphasis="high">
+              <Typography variant="h2" component="h2" fontWeight="bold" emphasis="high">
                   SOLVING THE N+1 ISSUE OF GRAPHQL
               </Typography>
               </CardContent>
