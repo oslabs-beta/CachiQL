@@ -7,6 +7,7 @@ const webpack = require('webpack');
 module.exports = {
   entry: ['@babel/polyfill', './src/client/index.tsx'],
   mode: 'development',
+  devtool: 'eval-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
@@ -25,7 +26,10 @@ module.exports = {
       },
       '/graphql': {
         target: 'http://localhost:3000'
-      }
+      },
+      '/counter': {
+        target: 'http://localhost:3000'
+      },
     }
   },
   module: {

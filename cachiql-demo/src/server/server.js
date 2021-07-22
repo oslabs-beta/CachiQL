@@ -16,6 +16,17 @@ const Author = require('./models/author');
 const Book = require('./models/book');
 const app = express();
 
+let counter = 0;
+
+app.get('/counter', (req, res) => {
+  let num = counter;
+  res.locals.num = num;
+  counter = 0;
+  console.log(num);
+  return res.status(200).json(res.locals.num)
+
+})
+
 const AuthorType = new GraphQLObjectType({
   name: 'Author',
   description: 'This represents an author of a book',
@@ -27,6 +38,7 @@ const AuthorType = new GraphQLObjectType({
       type: new GraphQLList(BookType),
       resolve: async (author) => {
         let fetched = await Book.find({ Author: author._id })
+        counter += 1;
         //console.log(fetched)
         return fetched;
       }
@@ -45,7 +57,8 @@ const BookType = new GraphQLObjectType({
       //need to change this to match db requirements
       resolve: async (book) => {
         let fetched = await Author.findOne({ books: book._id })
-        console.log(fetched)
+        counter += 1;
+        //console.log(counter)
         return fetched;
       }
     }
@@ -65,6 +78,7 @@ const RootQueryType = new GraphQLObjectType({
       //db query instead to get this
       resolve: async (parent, args) => {
         let fetched = await Book.findById(args.id)
+        counter += 1;
         return fetched;
       }
     },
@@ -74,6 +88,7 @@ const RootQueryType = new GraphQLObjectType({
       //query db in resolve instead of returning the books object
       resolve: async () => {
         let fetched = await Book.find({});
+        counter += 1;
         return fetched;
       }
     },
@@ -85,6 +100,7 @@ const RootQueryType = new GraphQLObjectType({
       },
       //query db in resolve instead of returning the books object
       resolve: async (parent, args) => {
+        counter += 1;
         return Author.findOne({ _id: args.id })
       }
     },
@@ -94,13 +110,32 @@ const RootQueryType = new GraphQLObjectType({
       //query db in resolve instead of returning the books object
       resolve: async () => {
         let fetched = await Author.find({});
+        counter += 1;
         return fetched;
       }
     }
   })
 });
 
-// const RootMutationType = new GraphQLObjectType({
+const schema = new GraphQLSchema({
+  query: RootQueryType,
+})
+
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  graphiql: true
+}))
+
+const uri = 'mongodb+srv://cachiql:cache@cachiql.pypfo.mongodb.net/cachiql?retryWrites=true&w=majority';
+const options = { useNewUrlParser: true, useUnifiedTopology: true }
+mongoose.connect(uri, options)
+  .then(() => app.listen(3000, console.log('Server running with mongodb on 3000')))
+  .catch(error => {
+    throw error;
+  });
+
+
+  // const RootMutationType = new GraphQLObjectType({
 //   name: 'Mutations',
 //   description: 'Root Mutation',
 //   fields: () => ({
@@ -137,20 +172,3 @@ const RootQueryType = new GraphQLObjectType({
 //     }
 //   })
 // })
-
-const schema = new GraphQLSchema({
-  query: RootQueryType,
-})
-
-app.use('/graphql', graphqlHTTP({
-  schema: schema,
-  graphiql: true
-}))
-
-const uri = 'mongodb+srv://cachiql:cache@cachiql.pypfo.mongodb.net/cachiql?retryWrites=true&w=majority';
-const options = { useNewUrlParser: true, useUnifiedTopology: true }
-mongoose.connect(uri, options)
-  .then(() => app.listen(3000, console.log('Server running with mongodb on 3000')))
-  .catch(error => {
-    throw error;
-  });
