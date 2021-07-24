@@ -13,7 +13,14 @@ const Stylegraphiql = styled.div`
   }
 `;
 
-export const Graphiql = () => {
+interface Props {
+  recentQueries: any[];
+  setRecentQueries: React.Dispatch<React.SetStateAction<any[]>>;
+}
+export const Graphiql: React.FC<Props> = ({
+  recentQueries,
+  setRecentQueries
+}) => {
   const [data, getData] = useState([]);
 
   // useEffect(() => {
@@ -32,8 +39,8 @@ export const Graphiql = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log('Am I getting data?', res);
-        const arr = [...data, res]
-        console.log(arr)
+        const arr = [...data, res];
+        console.log(arr);
       });
   };
 
@@ -41,11 +48,10 @@ export const Graphiql = () => {
     alert('Clicked toolbar button!');
   }
 
-
   return (
     <Stylegraphiql>
       <div className="graphiql">
-        <GraphiQL 
+        <GraphiQL
           fetcher={async (graphQLParams) => {
             const data = await fetch('graphql', {
               method: 'POST',
@@ -63,15 +69,15 @@ export const Graphiql = () => {
             });
           }}
         >
-         <GraphiQL.Toolbar>
-          // GraphiQL.ToolbarButton usage
-          <GraphiQL.ToolbarButton
-            onClick={() => onClickToolbarButton()}
-            title="ToolbarButton"
-            label="Click Me as well!"
-          />
-          // Some other possible toolbar items
-          <button name="GraphiQLButton">Click Me</button>
+          <GraphiQL.Toolbar>
+            // GraphiQL.ToolbarButton usage
+            <GraphiQL.ToolbarButton
+              onClick={() => onClickToolbarButton()}
+              title="ToolbarButton"
+              label="Click Me as well!"
+            />
+            // Some other possible toolbar items
+            <button name="GraphiQLButton">Click Me</button>
           </GraphiQL.Toolbar>
         </GraphiQL>
       </div>

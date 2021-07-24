@@ -17,7 +17,7 @@ const rows = [
   createData(1, 'Shortened Query', '0.00 ms', '0.00 ms', 'Yes', 866.99),
   createData(2, 'Shortened Query', '0.00 ms', '0.00 ms', 'Yes', 100.81),
   createData(3, 'Shortened Query', '0.00 ms', '0.00 ms', 'Yes', 654.39),
-  createData(4, 'Shortened Query', '0.00 ms', '0.00 ms', 'Yes', 212.79),
+  createData(4, 'Shortened Query', '0.00 ms', '0.00 ms', 'Yes', 212.79)
 ];
 
 function preventDefault(event) {
@@ -26,19 +26,26 @@ function preventDefault(event) {
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
-    marginTop: theme.spacing(3),
-  },
+    marginTop: theme.spacing(3)
+  }
 }));
 
 const queriesCount = () => {
   fetch('/counter')
     .then((data) => data.json())
     .then((data) => console.log(data.num));
+};
+
+interface Props {
+  recentQueries: any[];
+  setRecentQueries: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
-export const Queries = () => {
+export const Queries: React.FC<Props> = ({
+  recentQueries,
+  setRecentQueries
+}) => {
   const classes = useStyles();
-  
   return (
     <React.Fragment>
       <TitleGraph>Recent Queries</TitleGraph>

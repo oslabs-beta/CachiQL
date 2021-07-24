@@ -8,8 +8,12 @@ const useStyles = makeStyles({
     flex: 1
   },
 });
+interface Props {
+  recentQueries: any[];
+  setRecentQueries: React.Dispatch<React.SetStateAction<any[]>>;
+}
 
-export const Metrics = () => {
+export const Metrics: React.FC<Props> = ({ recentQueries, setRecentQueries }) => {
   const classes = useStyles();
   return (
     <React.Fragment>

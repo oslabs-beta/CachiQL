@@ -61,7 +61,12 @@ const BarStyle = styled.div`
   text-align: center;
 `;
 
-export const BuildBarChart = () => {
+interface Props {
+  recentQueries: any[];
+  setRecentQueries: React.Dispatch<React.SetStateAction<any[]>>;
+}
+
+export const BuildBarChart: React.FC<Props> = ({ recentQueries, setRecentQueries }) => {
   return (
     <>
       <TitleGraph>CachiQL Results</TitleGraph>
