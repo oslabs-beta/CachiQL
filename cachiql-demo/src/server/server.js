@@ -1,8 +1,11 @@
-<<<<<<< HEAD
 /* eslint-disable */
 var express = require('express');
 var { graphqlHTTP } = require('express-graphql');
 var { buildSchema } = require('graphql');
+//redis cache system 
+const redis = require('redis');
+const REDIS_PORT = process.env.REDIS_PORT || 6379;
+const client = redis.createClient(REDIS_PORT);
 
 const Schema = require('./mongoSchema');
 
@@ -43,7 +46,6 @@ app.use('/graphql', graphqlHTTP({
 
 app.listen(3000);
 console.log('Running a GraphQL API server at http://localhost:3000/graphql');
-=======
 /*eslint-disable*/
 
 const express = require('express');
@@ -63,6 +65,15 @@ const Book = require('./models/book');
 const app = express();
 
 let counter = 0;
+//added middleware cache 
+app.get('/', (req, res, next) => {
+  const {fetchedData} = req.params;
+  client.get(fetchedData, (err, data) => {
+    if (err) throw err;
+    if(data) res.send(setResponse(fetchedData, data));
+    else next();
+  })
+});
 
 app.get('/counter', (req, res) => {
   let num = counter;
@@ -71,7 +82,7 @@ app.get('/counter', (req, res) => {
   console.log(num);
   return res.status(200).json(res.locals.num)
 
-})
+});
 
 const AuthorType = new GraphQLObjectType({
   name: 'Author',
@@ -86,6 +97,9 @@ const AuthorType = new GraphQLObjectType({
         let fetched = await Book.find({ Author: author._id })
         counter += 1;
         //console.log(fetched)
+        //adds fetched data to redis cache
+        //fetchedData is a new key in the cache, set to expire @ 3600 = 1 hr savig the fetched data 
+        client.setex(fetchedData, 3600, fetched);
         return fetched;
       }
     }
@@ -105,6 +119,9 @@ const BookType = new GraphQLObjectType({
         let fetched = await Author.findOne({ books: book._id })
         counter += 1;
         //console.log(counter)
+        //adds fetched data to redis cache
+        //fetchedData is a new key in the cache, set to expire @ 3600 = 1 hr savig the fetched data 
+        client.setex(fetchedData, 3600, fetched);
         return fetched;
       }
     }
@@ -125,6 +142,9 @@ const RootQueryType = new GraphQLObjectType({
       resolve: async (parent, args) => {
         let fetched = await Book.findById(args.id)
         counter += 1;
+        //adds fetched data to redis cache
+        //fetchedData is a new key in the cache, set to expire @ 3600 = 1 hr savig the fetched data 
+        client.setex(fetchedData, 3600, fetched);
         return fetched;
       }
     },
@@ -135,6 +155,9 @@ const RootQueryType = new GraphQLObjectType({
       resolve: async () => {
         let fetched = await Book.find({});
         counter += 1;
+        //adds fetched data to redis cache
+        //fetchedData is a new key in the cache, set to expire @ 3600 = 1 hr savig the fetched data 
+        client.setex(fetchedData, 3600, fetched);
         return fetched;
       }
     },
@@ -157,6 +180,9 @@ const RootQueryType = new GraphQLObjectType({
       resolve: async () => {
         let fetched = await Author.find({});
         counter += 1;
+        //adds fetched data to redis cache
+        //fetchedData is a new key in the cache, set to expire @ 3600 = 1 hr savig the fetched data 
+        client.setex(fetchedData, 3600, fetched);
         return fetched;
       }
     }
@@ -218,4 +244,3 @@ mongoose.connect(uri, options)
 //     }
 //   })
 // })
->>>>>>> dev
