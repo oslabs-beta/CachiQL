@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema
-
+//schema for arthicle
 const articleSchema = new Schema({
   title: {
     type: String,
