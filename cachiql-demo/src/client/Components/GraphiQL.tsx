@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import GraphiQL from 'graphiql';
 import styled from 'styled-components';
 import 'graphiql/graphiql.min.css';
+import { execute } from 'graphql';
 
 const Stylegraphiql = styled.div`
   margin: auto;
@@ -13,7 +14,7 @@ const Stylegraphiql = styled.div`
 `;
 
 export const Graphiql = () => {
-  // const [count, setCount] = useState(false);
+  const [data, getData] = useState([]);
 
   // useEffect(() => {
   //   console.log('i am using effect');
@@ -26,18 +27,25 @@ export const Graphiql = () => {
   // }, []);
   // console.log('i am counting ', count);
 
-  // if (count === true) {
-  //   fetch('/counter')
-  //     .then((data) => data.json())
-  //     .then((data) => {
-  //       console.log('Am I getting data?', data);
-  //       setCount(false);
-  //     });
-  // }
+  const getCounter = () => {
+    fetch('/counter')
+      .then((res) => res.json())
+      .then((res) => {
+        console.log('Am I getting data?', res);
+        const arr = [...data, res]
+        console.log(arr)
+      });
+  };
+
+  function onClickToolbarButton(event) {
+    alert('Clicked toolbar button!');
+  }
+
+
   return (
     <Stylegraphiql>
       <div className="graphiql">
-        <GraphiQL
+        <GraphiQL 
           fetcher={async (graphQLParams) => {
             const data = await fetch('graphql', {
               method: 'POST',
@@ -48,12 +56,24 @@ export const Graphiql = () => {
               body: JSON.stringify(graphQLParams),
               credentials: 'same-origin'
             });
-            // setCount(true);
+            getCounter();
+            console.log('clicked', graphQLParams);
             return data.json().catch(() => {
-                data.text();
-              });
+              data.text();
+            });
           }}
-        />
+        >
+         <GraphiQL.Toolbar>
+          // GraphiQL.ToolbarButton usage
+          <GraphiQL.ToolbarButton
+            onClick={() => onClickToolbarButton()}
+            title="ToolbarButton"
+            label="Click Me as well!"
+          />
+          // Some other possible toolbar items
+          <button name="GraphiQLButton">Click Me</button>
+          </GraphiQL.Toolbar>
+        </GraphiQL>
       </div>
     </Stylegraphiql>
   );
