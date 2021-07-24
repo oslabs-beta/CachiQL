@@ -15,6 +15,8 @@ const {
 const Author = require('./models/author');
 const Book = require('./models/book');
 const app = express();
+const {AuthorType, BookType} = require('./resolvercache')
+
 
 let counter = 0;
 
@@ -27,43 +29,43 @@ app.get('/counter', (req, res) => {
 
 })
 
-const AuthorType = new GraphQLObjectType({
-  name: 'Author',
-  description: 'This represents an author of a book',
-  fields: () => ({
-    _id: { type: GraphQLNonNull(GraphQLID) },
-    firstName: { type: GraphQLNonNull(GraphQLString) },
-    lastName: { type: GraphQLNonNull(GraphQLString) },
-    books: {
-      type: new GraphQLList(BookType),
-      resolve: async (author) => {
-        let fetched = await Book.find({ Author: author._id })
-        counter += 1;
-        //console.log(fetched)
-        return fetched;
-      }
-    }
-  })
-})
+// const AuthorType = new GraphQLObjectType({
+//   name: 'Author',
+//   description: 'This represents an author of a book',
+//   fields: () => ({
+//     _id: { type: GraphQLNonNull(GraphQLID) },
+//     firstName: { type: GraphQLNonNull(GraphQLString) },
+//     lastName: { type: GraphQLNonNull(GraphQLString) },
+//     books: {
+//       type: new GraphQLList(BookType),
+//       resolve: async (author) => {
+//         let fetched = await Book.find({ Author: author._id })
+//         counter += 1;
+//         //console.log(fetched)
+//         return fetched;
+//       }
+//     }
+//   })
+// })
 
-const BookType = new GraphQLObjectType({
-  name: 'Book',
-  description: 'This represents a book written by an author',
-  fields: () => ({
-    _id: { type: GraphQLNonNull(GraphQLID) },
-    title: { type: GraphQLNonNull(GraphQLString) },
-    Author: {
-      type: AuthorType,
-      //need to change this to match db requirements
-      resolve: async (book) => {
-        let fetched = await Author.findOne({ books: book._id })
-        counter += 1;
-        //console.log(counter)
-        return fetched;
-      }
-    }
-  })
-})
+// const BookType = new GraphQLObjectType({
+//   name: 'Book',
+//   description: 'This represents a book written by an author',
+//   fields: () => ({
+//     _id: { type: GraphQLNonNull(GraphQLID) },
+//     title: { type: GraphQLNonNull(GraphQLString) },
+//     Author: {
+//       type: AuthorType,
+//       //need to change this to match db requirements
+//       resolve: async (book) => {
+//         let fetched = await Author.findOne({ books: book._id })
+//         counter += 1;
+//         //console.log(counter)
+//         return fetched;
+//       }
+//     }
+//   })
+// })
 
 const RootQueryType = new GraphQLObjectType({
   name: 'Query',
@@ -100,6 +102,7 @@ const RootQueryType = new GraphQLObjectType({
       },
       //query db in resolve instead of returning the books object
       resolve: async (parent, args) => {
+        console.log('here')
         counter += 1;
         return Author.findOne({ _id: args.id })
       }

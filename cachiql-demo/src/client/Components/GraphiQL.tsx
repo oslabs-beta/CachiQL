@@ -44,7 +44,6 @@ export const Graphiql = () => {
     <Stylegraphiql>
       <div className="graphiql">
         <GraphiQL
-          ExecuteButton._onClick=
           fetcher={async (graphQLParams) => {
             const data = await fetch('graphql', {
               method: 'POST',
