@@ -99,7 +99,7 @@ const AuthorType = new GraphQLObjectType({
         //console.log(fetched)
         //adds fetched data to redis cache
         //fetchedData is a new key in the cache, set to expire @ 3600 = 1 hr savig the fetched data 
-        client.setex(fetchedData, 3600, fetched);
+        client.setex(fetchedAuthor, 3600, fetched);
         return fetched;
       }
     }
@@ -121,7 +121,7 @@ const BookType = new GraphQLObjectType({
         //console.log(counter)
         //adds fetched data to redis cache
         //fetchedData is a new key in the cache, set to expire @ 3600 = 1 hr savig the fetched data 
-        client.setex(fetchedData, 3600, fetched);
+        client.setex(fetchedBooks, 3600, fetched);
         return fetched;
       }
     }
@@ -144,7 +144,7 @@ const RootQueryType = new GraphQLObjectType({
         counter += 1;
         //adds fetched data to redis cache
         //fetchedData is a new key in the cache, set to expire @ 3600 = 1 hr savig the fetched data 
-        client.setex(fetchedData, 3600, fetched);
+        client.setex(fetchedBook, 3600, fetched);
         return fetched;
       }
     },
@@ -157,7 +157,7 @@ const RootQueryType = new GraphQLObjectType({
         counter += 1;
         //adds fetched data to redis cache
         //fetchedData is a new key in the cache, set to expire @ 3600 = 1 hr savig the fetched data 
-        client.setex(fetchedData, 3600, fetched);
+        client.setex(fetchedBookAll, 3600, fetched);
         return fetched;
       }
     },
@@ -182,7 +182,7 @@ const RootQueryType = new GraphQLObjectType({
         counter += 1;
         //adds fetched data to redis cache
         //fetchedData is a new key in the cache, set to expire @ 3600 = 1 hr savig the fetched data 
-        client.setex(fetchedData, 3600, fetched);
+        client.setex(fetchedAuthorAll, 3600, fetched);
         return fetched;
       }
     }
