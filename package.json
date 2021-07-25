@@ -1,0 +1,19 @@
+{
+  "name": "cachiql",
+  "version": "1.0.0",
+  "description": "resolves the N+1 problem ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oslabs-beta/CachiQL.git"
+  },
+  "author": "eddy zapata vanneza lutz Kaden jhonson fahad shake",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/CachiQL/issues"
+  },
+  "homepage": "https://github.com/oslabs-beta/CachiQL#readme"
+}
