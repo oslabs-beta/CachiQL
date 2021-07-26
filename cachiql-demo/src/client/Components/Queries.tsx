@@ -38,17 +38,7 @@ const queriesCount = () => {
 
 export const Queries = () => {
   const classes = useStyles();
-  const [count, setCount] = useState();
-  useEffect(() => {
-    console.log('i am using effect');
-    fetch('/counter')
-      .then((data) => data.json())
-      .then((data) => {
-        console.log('this is the data', data);
-        setCount(data || []);
-      });
-  }, []);
-  console.log('i am counting ', count);
+  
   return (
     <React.Fragment>
       <TitleGraph>Recent Queries</TitleGraph>
