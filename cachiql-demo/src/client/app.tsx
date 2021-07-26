@@ -1,9 +1,6 @@
 import React from 'react';
 import { FloatNavigationMenuStyle } from './Components/Navigation';
 import { Graphiql } from './Components/GraphiQL';
-<<<<<<< HEAD
-import CachiQLLogo from '../../dist/assets/cachiql_(1).svg';
-=======
 import { BuildBarChart } from './Components/BarChart';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -18,7 +15,6 @@ import { Banner } from './Components/Banner';
 import { WhyCachiQL } from './Components/Cards';
 import { Demo } from './Components/Demologo';
 import Stepper from './Components/Stepper';
->>>>>>> dev
 
 const useStyles = makeStyles((theme) => ({
   root: {

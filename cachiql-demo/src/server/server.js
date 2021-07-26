@@ -1,51 +1,3 @@
-/* eslint-disable */
-var express = require('express');
-var { graphqlHTTP } = require('express-graphql');
-var { buildSchema } = require('graphql');
-//redis cache system 
-const redis = require('redis');
-const REDIS_PORT = process.env.REDIS_PORT || 6379;
-const client = redis.createClient(REDIS_PORT);
-
-const Schema = require('./mongoSchema');
-
-const {booksCompose} = require('./mongoSchema');
-// Construct a schema, using GraphQL schema language
-
-var schema = buildSchema(`
-  type Query {
-    firstName: String
-    book: Book
-  }
-  type Book {
-    id: Int
-    title: String
-    author: Author
-    
-  }
-  type Author {
-    id: Int
-    firstName: String
-    lastName: String
-    books: [Book]
-  }
-`);
-
-
-const root = {
-  firstName: () => "ddd",
-  books: booksCompose.find('findMany') 
-};
- 
-var app = express();
-app.use('/graphql', graphqlHTTP({
-  schema: schema,
-  rootValue: root,
-  graphiql: true,
-}));
-
-app.listen(3000);
-console.log('Running a GraphQL API server at http://localhost:3000/graphql');
 /*eslint-disable*/
 
 const express = require('express');
@@ -64,12 +16,17 @@ const Author = require('./models/author');
 const Book = require('./models/book');
 const app = express();
 
+//redis cache system 
+const redis = require('redis');
+const REDIS_PORT = process.env.REDIS_PORT || 6379;
+const client = redis.createClient(REDIS_PORT);
+
 let counter = 0;
 //added middleware cache 
 app.get('/', (req, res, next) => {
   const {fetchedData} = req.params;
   client.get(fetchedData, (err, data) => {
-    if (err) throw err;
+    if(err) throw err;
     if(data) res.send(setResponse(fetchedData, data));
     else next();
   })
