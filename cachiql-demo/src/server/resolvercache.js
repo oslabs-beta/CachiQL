@@ -11,17 +11,9 @@ const {
 } = require('graphql');
 const Author = require('./models/author');
 const Book = require('./models/book');
+const redis = require('redis');
+const mCache = require('memory-cache');
 
-class cache {
-  constructor() {
-    this.cache = {}
-  }
-  deleteCache() {
-    this.cache = null;
-  }
-}
-
-let authorCache = new cache;
 
 let counter = 0;
 
@@ -64,17 +56,18 @@ const BookType = new GraphQLObjectType({
       type: AuthorType,
       //need to change this to match db requirements
       resolve: async (book) => {
-        console.log(authorCache.cache)
-        if (authorCache.cache[book._id]) {
-          authorCache.cache[book._id] = 
+        console.log(mCache.get(book.id))
+        //console.log(mCache.get())
+        if (mCache.get(book.id)) {
           console.log("the data is logged")
-          console.log(authorCache.cache)
-          return authorCache.cache[book._id]
+          console.log(mCache)
+          return mCache.get(book.id)
         }
         else {
-          let fetched = await Author.findOne({ books: book._id })
+          let fetched = await Author.findOne({ books: book.id })
           counter += 1;
-          authorCache.cache[book._id] = fetched
+          mCache.put(book.id, fetched);
+          console.log(mCache.get(book.id))
           return fetched;
         }
 

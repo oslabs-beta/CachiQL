@@ -15,10 +15,13 @@ const {
 const Author = require('./models/author');
 const Book = require('./models/book');
 const app = express();
-const {AuthorType, BookType} = require('./resolvercache')
+const cache = require('memory-cache');
+const AuthorLoader = require('./AuthorLoader')
+//const {AuthorType, BookType} = require('./resolvercache')
 
 
 let counter = 0;
+let cacheL = {};
 
 app.get('/counter', (req, res) => {
   let num = counter;
@@ -67,9 +70,79 @@ app.get('/counter', (req, res) => {
 //   })
 // })
 
+const AuthorType = new GraphQLObjectType({
+  name: 'Author',
+  description: 'This represents an author of a book',
+  fields: () => ({
+    _id: { type: GraphQLNonNull(GraphQLID) },
+    firstName: { type: GraphQLNonNull(GraphQLString) },
+    lastName: { type: GraphQLNonNull(GraphQLString) },
+    books: {
+      type: new GraphQLList(BookType),
+      resolve: async (author) => {
+
+        context.cachiql
+
+        if (cached[author.id]) {
+          //console.log(author.id)
+          //console.log(cached[author.id])
+          return cached[author.id];
+        }
+        else {
+          let fetched = await Book.find({ Author: author._id })
+          counter += 1;
+          cached[author.id] = fetched
+          //console.log(cached)
+          return fetched;
+        }
+
+      }
+    }
+  })
+})
+
+const BookType = new GraphQLObjectType({
+  name: 'Book',
+  description: 'This represents a book written by an author',
+  fields: () => ({
+    _id: { type: GraphQLNonNull(GraphQLID) },
+    title: { type: GraphQLNonNull(GraphQLString) },
+    Author: {
+      type: AuthorType,
+      //need to change this to match db requirements
+      resolve: (book) => {
+        //console.log('getting data')
+        //console.log(book.id)
+        //console.log(cacheL[book.id])
+        let cached = cache.get(book.id)
+        if (cacheL[book.id]) {
+          //console.log("the data is logged")
+          //console.log(cache)
+          //console.log('logged in cache')
+
+          return cache.get(book.id)
+        }
+        else {
+          let fetched = Author.findOne({ books: book.id })
+          counter += 1;
+          cacheL[book.id] = fetched;
+          //console.log(cacheL[book.id])
+          //console.log('count', counter);
+          cache.put(book.id, fetched);
+          //console.log(cache.get(book.id))
+          return fetched;
+        }
+
+      }
+    }
+  })
+})
+
+
 const RootQueryType = new GraphQLObjectType({
   name: 'Query',
   description: 'Root Query',
+  context: () => console.log('hello'),
   fields: () => ({
     book: {
       type: BookType,
@@ -88,9 +161,17 @@ const RootQueryType = new GraphQLObjectType({
       type: new GraphQLList(BookType),
       description: 'List of Books',
       //query db in resolve instead of returning the books object
-      resolve: async () => {
+      resolve: async (parent, other, context) => {
+        //console.log(context.authorLoader)
         let fetched = await Book.find({});
         counter += 1;
+        let keys = [];
+        fetched.forEach(key => keys.push(key.Author))
+
+        let otherStuff = await context.authorLoader.loadAll(keys)
+        console.log(otherStuff)
+        //console.log('count', counter);
+        //console.log('data collected')
         return fetched;
       }
     },
@@ -102,6 +183,7 @@ const RootQueryType = new GraphQLObjectType({
       },
       //query db in resolve instead of returning the books object
       resolve: async (parent, args) => {
+        context()
         console.log('here')
         counter += 1;
         return Author.findOne({ _id: args.id })
@@ -114,6 +196,7 @@ const RootQueryType = new GraphQLObjectType({
       resolve: async () => {
         let fetched = await Author.find({});
         counter += 1;
+
         return fetched;
       }
     }
@@ -126,7 +209,8 @@ const schema = new GraphQLSchema({
 
 app.use('/graphql', graphqlHTTP({
   schema: schema,
-  graphiql: true
+  graphiql: true,
+  context: { authorLoader: AuthorLoader() }
 }))
 
 const uri = 'mongodb+srv://cachiql:cache@cachiql.pypfo.mongodb.net/cachiql?retryWrites=true&w=majority';
