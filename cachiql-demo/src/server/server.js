@@ -26,6 +26,7 @@ let counter = 0;
 app.get('/', (req, res, next) => {
   const {fetchedData} = req.params;
   client.get(fetchedData, (err, data) => {
+    console.log(fetchedData)
     if(err) throw err;
     if(data) res.send(setResponse(fetchedData, data));
     else next();

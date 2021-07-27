@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export const Banner = () => {
   const classes = useStyles();
-  console.log(calsses)
+  console.log(classes)
   const Star = ({ x, y, duration, size }) => {
     const style = {
       left: `${x}px`,
