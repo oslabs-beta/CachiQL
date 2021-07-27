@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const authorSchema = require('./book')
 
 const Schema = mongoose.Schema;
-//Creates a schema for every instance of a book
+//Creates schema for every instance of a book
 const bookSchema = new Schema({
   title: {
     type: String,
