@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GraphiQL from 'graphiql';
 import styled from 'styled-components';
 import 'graphiql/graphiql.min.css';
@@ -13,33 +13,27 @@ const Stylegraphiql = styled.div`
 `;
 
 export const Graphiql = () => {
-  const [loaded, setLoaded] = useState(false);
-  const [count, setCount] = useState([]);
-  const dataLoaded = () => {
-    fetch('./counter')
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        if (data > 0) {
-          console.log('loaded')
-          setCount(data || []);
-          setLoaded(true);
-        }
-        if (loaded) {
-          console.log('count edited')
-          console.log('loaded data', data)
-          setCount(data || []);
-          setLoaded(false);
-        }
-      })
-    console.log('data is loaded');
-    console.log('count', count);
-  }
+  // const [count, setCount] = useState(false);
 
-  const handleAdd = (event) => {
-    console.log('what is the event', event)
-    setCount(event || [])
-  }
+  // useEffect(() => {
+  //   console.log('i am using effect');
+  //   fetch('/counter')
+  //     .then((data) => data.json())
+  //     .then((data) => {
+  //       console.log('this is the data', data);
+  //       setCount(data || []);
+  //     });
+  // }, []);
+  // console.log('i am counting ', count);
+
+  // if (count === true) {
+  //   fetch('/counter')
+  //     .then((data) => data.json())
+  //     .then((data) => {
+  //       console.log('Am I getting data?', data);
+  //       setCount(false);
+  //     });
+  // }
   return (
     <Stylegraphiql>
       <div className="graphiql">
@@ -54,10 +48,11 @@ export const Graphiql = () => {
               body: JSON.stringify(graphQLParams),
               credentials: 'same-origin'
             });
-            dataLoaded();
-            return data.json().catch(() => data.text());
+            // setCount(true);
+            return data.json().catch(() => {
+              data.text();
+            });
           }}
-          ExecuteButton
         />
       </div>
     </Stylegraphiql>
