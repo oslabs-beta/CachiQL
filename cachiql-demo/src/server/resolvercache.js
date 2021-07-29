@@ -67,7 +67,7 @@ const BookType = new GraphQLObjectType({
           let fetched = await Author.findOne({ books: book.id })
           counter += 1;
           mCache.put(book.id, fetched);
-          console.log(mCache.get(book.id))
+          console.log(mCache.get(book.id));
           return fetched;
         }
 

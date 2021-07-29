@@ -17,6 +17,7 @@ const Book = require('./models/book');
 const app = express();
 const cache = require('memory-cache');
 const AuthorLoader = require('./AuthorLoader')
+const BookLoader = require('./BookLoader')
 //const {AuthorType, BookType} = require('./resolvercache')
 
 
@@ -79,23 +80,30 @@ const AuthorType = new GraphQLObjectType({
     lastName: { type: GraphQLNonNull(GraphQLString) },
     books: {
       type: new GraphQLList(BookType),
-      resolve: async (author) => {
-
-        context.cachiql
-
-        if (cached[author.id]) {
-          //console.log(author.id)
-          //console.log(cached[author.id])
-          return cached[author.id];
+      resolve: async (author, _, context) => {
+        if (context.cachedData.length === 0) {
+          counter += 1;
+          return await Book.find({ Author: author._id })
         }
         else {
-          let fetched = await Book.find({ Author: author._id })
-          counter += 1;
-          cached[author.id] = fetched
-          //console.log(cached)
-          return fetched;
-        }
+          const arr = [];
+          for (let i = 0; i < context.cachedData.length; i++) {
+            const book = context.cachedData[i]
+            for (let j = 0; j < author.books.length; j++) {
+              const authBook = author.books[j];
+              if (authBook.toString() === book._id.toString()) {
+                arr.push(book);
+              }
+            }
+          }
+          if (arr.length !== author.books.length) {
+            counter += 1
+            return await Book.find({ Author: author._id })
+          }
+          setTimeout(() => console.log('timed out'), 0)
 
+          return arr;
+        }
       }
     }
   })
@@ -110,29 +118,27 @@ const BookType = new GraphQLObjectType({
     Author: {
       type: AuthorType,
       //need to change this to match db requirements
-      resolve: (book) => {
-        //console.log('getting data')
-        //console.log(book.id)
-        //console.log(cacheL[book.id])
-        let cached = cache.get(book.id)
-        if (cacheL[book.id]) {
-          //console.log("the data is logged")
-          //console.log(cache)
-          //console.log('logged in cache')
+      resolve: async (book, _, context) => {
 
-          return cache.get(book.id)
+        if (context.cachedData.length === 0) {
+          counter += 1
+          return await Author.findOne({ books: book._id });
         }
         else {
-          let fetched = Author.findOne({ books: book.id })
-          counter += 1;
-          cacheL[book.id] = fetched;
-          //console.log(cacheL[book.id])
-          //console.log('count', counter);
-          cache.put(book.id, fetched);
-          //console.log(cache.get(book.id))
-          return fetched;
-        }
 
+          for (let i = 0; i < context.cachedData.length; i++) {
+            const author = context.cachedData[i]
+            for (let j = 0; j < author.books.length; j++) {
+              const authBook = author.books[j];
+              if (authBook.toString() === book._id.toString()) return author;
+
+            }
+          }
+          counter += 1
+
+
+          return await Author.findOne({ books: book._id });
+        }
       }
     }
   })
@@ -167,11 +173,15 @@ const RootQueryType = new GraphQLObjectType({
         counter += 1;
         let keys = [];
         fetched.forEach(key => keys.push(key.Author))
+        console.log(context.cachedData)
 
-        let otherStuff = await context.authorLoader.loadAll(keys)
-        console.log(otherStuff)
+        context.cachedData = await context.authorLoader.loadAll(keys)
+        if (context.cachedData.length !== 0) {
+          counter += 1;
+        };
         //console.log('count', counter);
         //console.log('data collected')
+        setTimeout(() => context.cachedData = [], 0);
         return fetched;
       }
     },
@@ -184,7 +194,6 @@ const RootQueryType = new GraphQLObjectType({
       //query db in resolve instead of returning the books object
       resolve: async (parent, args) => {
         context()
-        console.log('here')
         counter += 1;
         return Author.findOne({ _id: args.id })
       }
@@ -193,9 +202,17 @@ const RootQueryType = new GraphQLObjectType({
       type: new GraphQLList(AuthorType),
       description: 'List of all Authors',
       //query db in resolve instead of returning the books object
-      resolve: async () => {
+      resolve: async (parent, _, context) => {
         let fetched = await Author.find({});
         counter += 1;
+        let keys = [];
+        fetched.forEach(key => keys.push(...key.books))
+
+        context.cachedData = await context.bookLoader.loadAll(keys)
+        if (context.cachedData.length !== 0) {
+          counter += 1;
+        }
+
 
         return fetched;
       }
@@ -210,7 +227,11 @@ const schema = new GraphQLSchema({
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   graphiql: true,
-  context: { authorLoader: AuthorLoader() }
+  context: {
+    authorLoader: AuthorLoader(),
+    bookLoader: BookLoader(),
+    cachedData: []
+  },
 }))
 
 const uri = 'mongodb+srv://cachiql:cache@cachiql.pypfo.mongodb.net/cachiql?retryWrites=true&w=majority';
@@ -221,41 +242,3 @@ mongoose.connect(uri, options)
     throw error;
   });
 
-
-  // const RootMutationType = new GraphQLObjectType({
-//   name: 'Mutations',
-//   description: 'Root Mutation',
-//   fields: () => ({
-//     addBook: {
-//       type: BookType,
-//       description: 'Add a Book',
-//       args: {
-//         name: { type: GraphQLNonNull(GraphQLString) },
-//         authorid: { type: GraphQLNonNull(GraphQLInt) }
-//       },
-//       resolve: async (parent, args) => {
-//         const statement = 'insert into books (name, authorid) values ($1, $2) returning *';
-//         const values = [args.name, args.authorid];
-//         const data = await db.query(statement, values);
-//         return data.rows[0];
-//       }
-//     },
-//     addAuthor: {
-//       type: AuthorType,
-//       description: 'Add an Author',
-//       args: {
-//         name: { type: GraphQLNonNull(GraphQLString) }
-//       },
-//       //change this to db query
-//       resolve: async (parent, args) => {
-//         // const author = { id: authors.length + 1, name: args.name };
-//         // authors.push(author);
-//         // return author;
-//         const statement = 'insert into authors (name) values ($1) returning *';
-//         const values = [args.name];
-//         const data = await db.query(statement, values);
-//         return data.rows[0];
-//       }
-//     }
-//   })
-// })

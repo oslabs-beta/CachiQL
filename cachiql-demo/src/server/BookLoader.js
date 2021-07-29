@@ -1,7 +1,7 @@
 /*eslint-disable */
 const { Cachiql } = require('./cachiql');
 
-const Author = require('./models/author');
+const Book = require('./models/book');
 
 // const formatResult = (authors, ids) => {
 //   const authorMap = {};
@@ -13,14 +13,14 @@ const Author = require('./models/author');
 //   return ids.map(id => authorMap[id]);
 // }
 
-const batchAuthors = async (ids) => {
+const batchBooks = async (ids) => {
   try {
-    const authors = await Author.find({ '_id': { $in: ids } });
+    const books = await Book.find({ '_id': { $in: ids } });
     //return formatResult(authors, ids);
-    return authors;
+    return books;
   } catch (err) {
-    throw new Error('There was an error getting the Authors');
+    throw new Error('There was an error getting the Books');
   }
 };
 
-module.exports = () => new Cachiql(batchAuthors);
+module.exports = () => new Cachiql(batchBooks);

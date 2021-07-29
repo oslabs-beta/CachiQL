@@ -1,9 +1,9 @@
 /*eslint-disable */
 
 const loader = (keys) => {
-  console.log(keys)
   return new Promise(keys) || new Error
 }
+
 
 class Cachiql {
   constructor(loader) {
@@ -14,6 +14,9 @@ class Cachiql {
     }
     this.loader = loader; // build  this function
     this.batch = null;
+    // this.cacheKey = validateCacheKey();
+    // this.cacheMap = validateMap();
+
   }
 
   load(key) { //key is a promise of the objectID
@@ -22,9 +25,9 @@ class Cachiql {
         'The key passed into the function is undefined please use valid key'
       )
     }
-    //console.log('object key in load()', key);
+
     const batch = getBatch(this) // create this function
-    //console.log('batch', batch)
+
     batch.keys.push(key); // add current key to the batch array
     const keyPromise = new Promise((resolve, reject) => {
       batch.cbs.push({ resolve, reject });
@@ -39,15 +42,33 @@ class Cachiql {
         'The value passed into the loadAll() function is not an array'
       )
     }
-    console.log('cachiql loadAll(keys)', keys)
+    this.batch = null;
+    console.log('this batch', this.batch)
+
+    function removeDuplicates(data, key) {
+      const arr = []
+      data.forEach((el, i) => {
+        let length = arr.length;
+        let included = false
+        for (let i = 0; i < length; i++) {
+          if (el.toString() === arr[i].toString()) {
+            included = true;
+          }
+        }
+        if(!included) arr.push(el)
+      })
+      return arr;
+    }
+
+    const uniqueKeys = removeDuplicates(keys, item => item)
+
     const promiseLoader = [];
-    for (let i = 0; i < keys.length; i++) {
-      promiseLoader.push(this.load(keys[i]).catch(error => error));
+    for (let i = 0; i < uniqueKeys.length; i++) {
+      promiseLoader.push(this.load(uniqueKeys[i]).catch(error => error));
 
     }
 
-    console.log('promiseLoader', promiseLoader)
-    console.log(this.batch)
+    sendBatch(this, this.batch);
 
     return Promise.all(promiseLoader);
   }
@@ -64,14 +85,16 @@ const batch = {
 
 const getBatch = (cachiql) => {
   cachiql.batch = batch;
-
+  //sendBatch(cachiql, cachiql.batch)
   return batch;
 }
 
 const sendBatch = (cachiql, batch) => {
   batch.hasSent = true;
+  console.log(batch.keys.length)
 
   if (batch.keys.length === 0) {
+    console.log('i am in the return for the length issue in sendBatch')
     return;
   }
 
