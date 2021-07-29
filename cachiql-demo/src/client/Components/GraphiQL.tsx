@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import GraphiQL from 'graphiql';
 import styled from 'styled-components';
 import 'graphiql/graphiql.min.css';
@@ -13,6 +13,27 @@ const Stylegraphiql = styled.div`
 `;
 
 export const Graphiql = () => {
+  // const [count, setCount] = useState(false);
+
+  // useEffect(() => {
+  //   console.log('i am using effect');
+  //   fetch('/counter')
+  //     .then((data) => data.json())
+  //     .then((data) => {
+  //       console.log('this is the data', data);
+  //       setCount(data || []);
+  //     });
+  // }, []);
+  // console.log('i am counting ', count);
+
+  // if (count === true) {
+  //   fetch('/counter')
+  //     .then((data) => data.json())
+  //     .then((data) => {
+  //       console.log('Am I getting data?', data);
+  //       setCount(false);
+  //     });
+  // }
   return (
     <Stylegraphiql>
       <div className="graphiql">
@@ -27,7 +48,10 @@ export const Graphiql = () => {
               body: JSON.stringify(graphQLParams),
               credentials: 'same-origin'
             });
-            return data.json().catch(() => data.text());
+            // setCount(true);
+            return data.json().catch(() => {
+                data.text();
+              });
           }}
         />
       </div>
