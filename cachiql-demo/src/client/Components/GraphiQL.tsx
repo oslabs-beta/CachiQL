@@ -50,8 +50,8 @@ export const Graphiql = () => {
             });
             // setCount(true);
             return data.json().catch(() => {
-                data.text();
-              });
+              data.text();
+            });
           }}
         />
       </div>
