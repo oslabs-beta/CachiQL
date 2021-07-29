@@ -15,6 +15,9 @@ const {
 const Author = require('./models/author');
 const Book = require('./models/book');
 const app = express();
+const path = require('path');
+
+app.use(express.static(path.join(__dirname, '../assets')));
 
 let counter = 0;
 
