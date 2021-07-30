@@ -21,31 +21,13 @@ export const Graphiql: React.FC<Props> = ({
   recentQueries,
   setRecentQueries
 }) => {
-
-  // useEffect(() => {
-  //   console.log('i am using effect');
-  //   fetch('/counter')
-  //     .then((data) => data.json())
-  //     .then((data) => {
-  //       console.log('this is the data', data);
-  //       setCount(data || []);
-  //     });
-  // }, []);
-  // console.log('i am counting ', count);
-
   const getCounter = () => {
     fetch('/counter')
       .then((res) => res.json())
       .then((data) => {
-        console.log('Am I getting data?', data);
         setRecentQueries([...recentQueries, ...data] || [...recentQueries]);
-        console.log("Did I set state?", recentQueries);
       });
   };
-
-  function onClickToolbarButton(event) {
-    alert('Clicked toolbar button!');
-  }
 
   return (
     <Stylegraphiql>
@@ -61,7 +43,6 @@ export const Graphiql: React.FC<Props> = ({
               body: JSON.stringify(graphQLParams),
               credentials: 'same-origin'
             });
-            console.log('clicked', graphQLParams);
             return data.json().catch(() => {
               data.text();
             });

@@ -6,10 +6,8 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
-import CachiQLLogo from '../../dist/assets/cachiql_(1).svg';
 import { makeStyles } from '@material-ui/core/styles';
 import { Metrics } from './Components/Metrics';
-import { Queries } from './Components/Queries';
 import clsx from 'clsx';
 import { Banner } from './Components/Banner';
 import { WhyCachiQL } from './Components/Cards';
@@ -64,12 +62,6 @@ const App: React.FC = () => {
           <Grid item xs={12} md={4} lg={3}>
             <Paper className={fixedHeightPaper}>
               <Metrics {...{ recentQueries, setRecentQueries }} />
-            </Paper>
-          </Grid>
-          {/* Recent Queries */}
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <Queries {...{ recentQueries, setRecentQueries }} />
             </Paper>
           </Grid>
         </Grid>
