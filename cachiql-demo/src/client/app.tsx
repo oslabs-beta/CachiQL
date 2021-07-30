@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const App = () => {
+const App: React.FC = () => {
   const [recentQueries, setRecentQueries] = useState<any[]>([]);
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
