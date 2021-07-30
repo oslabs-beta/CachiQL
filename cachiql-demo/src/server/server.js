@@ -18,58 +18,21 @@ const app = express();
 const cache = require('memory-cache');
 const AuthorLoader = require('./AuthorLoader')
 const BookLoader = require('./BookLoader')
+const { Cachiql } = require('./cachiql')
 //const {AuthorType, BookType} = require('./resolvercache')
 
-
+let mockCounter = 0;
 let counter = 0;
-let cacheL = {};
 
 app.get('/counter', (req, res) => {
   let num = counter;
   res.locals.num = num;
+  res.locals.mockNum = mockCounter
   counter = 0;
-  console.log(num);
-  return res.status(200).json(res.locals.num)
+  console.log('count: ', num);
+  return res.status(200).json([res.locals.num, res.locals.mockNum])
 
 })
-
-// const AuthorType = new GraphQLObjectType({
-//   name: 'Author',
-//   description: 'This represents an author of a book',
-//   fields: () => ({
-//     _id: { type: GraphQLNonNull(GraphQLID) },
-//     firstName: { type: GraphQLNonNull(GraphQLString) },
-//     lastName: { type: GraphQLNonNull(GraphQLString) },
-//     books: {
-//       type: new GraphQLList(BookType),
-//       resolve: async (author) => {
-//         let fetched = await Book.find({ Author: author._id })
-//         counter += 1;
-//         //console.log(fetched)
-//         return fetched;
-//       }
-//     }
-//   })
-// })
-
-// const BookType = new GraphQLObjectType({
-//   name: 'Book',
-//   description: 'This represents a book written by an author',
-//   fields: () => ({
-//     _id: { type: GraphQLNonNull(GraphQLID) },
-//     title: { type: GraphQLNonNull(GraphQLString) },
-//     Author: {
-//       type: AuthorType,
-//       //need to change this to match db requirements
-//       resolve: async (book) => {
-//         let fetched = await Author.findOne({ books: book._id })
-//         counter += 1;
-//         //console.log(counter)
-//         return fetched;
-//       }
-//     }
-//   })
-// })
 
 const AuthorType = new GraphQLObjectType({
   name: 'Author',
@@ -125,7 +88,6 @@ const BookType = new GraphQLObjectType({
           return await Author.findOne({ books: book._id });
         }
         else {
-
           for (let i = 0; i < context.cachedData.length; i++) {
             const author = context.cachedData[i]
             for (let j = 0; j < author.books.length; j++) {
@@ -135,7 +97,6 @@ const BookType = new GraphQLObjectType({
             }
           }
           counter += 1
-
 
           return await Author.findOne({ books: book._id });
         }
@@ -171,6 +132,7 @@ const RootQueryType = new GraphQLObjectType({
         //console.log(context.authorLoader)
         let fetched = await Book.find({});
         counter += 1;
+        mockCounter += 1;
         let keys = [];
         fetched.forEach(key => keys.push(key.Author))
         console.log(context.cachedData)
@@ -179,8 +141,8 @@ const RootQueryType = new GraphQLObjectType({
         if (context.cachedData.length !== 0) {
           counter += 1;
         };
-        //console.log('count', counter);
-        //console.log('data collected')
+        mockCounter += keys.length
+        console.log('mockCounter', mockCounter)
         setTimeout(() => context.cachedData = [], 0);
         return fetched;
       }
@@ -193,7 +155,6 @@ const RootQueryType = new GraphQLObjectType({
       },
       //query db in resolve instead of returning the books object
       resolve: async (parent, args) => {
-        context()
         counter += 1;
         return Author.findOne({ _id: args.id })
       }
@@ -205,15 +166,17 @@ const RootQueryType = new GraphQLObjectType({
       resolve: async (parent, _, context) => {
         let fetched = await Author.find({});
         counter += 1;
+        mockCounter += 1
         let keys = [];
         fetched.forEach(key => keys.push(...key.books))
+        mockCounter += keys.length
 
         context.cachedData = await context.bookLoader.loadAll(keys)
         if (context.cachedData.length !== 0) {
           counter += 1;
         }
 
-
+        console.log(mockCounter)
         return fetched;
       }
     }
@@ -228,8 +191,8 @@ app.use('/graphql', graphqlHTTP({
   schema: schema,
   graphiql: true,
   context: {
-    authorLoader: AuthorLoader(),
-    bookLoader: BookLoader(),
+    authorLoader: new Cachiql(AuthorLoader),
+    bookLoader: new Cachiql(BookLoader),
     cachedData: []
   },
 }))
