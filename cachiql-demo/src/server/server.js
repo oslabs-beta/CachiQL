@@ -15,8 +15,14 @@ const {
 const Author = require('./models/author');
 const Book = require('./models/book');
 const app = express();
+const cache = require('memory-cache');
+const AuthorLoader = require('./AuthorLoader')
+const BookLoader = require('./BookLoader')
+//const {AuthorType, BookType} = require('./resolvercache')
+
 
 let counter = 0;
+let cacheL = {};
 
 app.get('/counter', (req, res) => {
   let num = counter;
@@ -27,6 +33,44 @@ app.get('/counter', (req, res) => {
 
 })
 
+// const AuthorType = new GraphQLObjectType({
+//   name: 'Author',
+//   description: 'This represents an author of a book',
+//   fields: () => ({
+//     _id: { type: GraphQLNonNull(GraphQLID) },
+//     firstName: { type: GraphQLNonNull(GraphQLString) },
+//     lastName: { type: GraphQLNonNull(GraphQLString) },
+//     books: {
+//       type: new GraphQLList(BookType),
+//       resolve: async (author) => {
+//         let fetched = await Book.find({ Author: author._id })
+//         counter += 1;
+//         //console.log(fetched)
+//         return fetched;
+//       }
+//     }
+//   })
+// })
+
+// const BookType = new GraphQLObjectType({
+//   name: 'Book',
+//   description: 'This represents a book written by an author',
+//   fields: () => ({
+//     _id: { type: GraphQLNonNull(GraphQLID) },
+//     title: { type: GraphQLNonNull(GraphQLString) },
+//     Author: {
+//       type: AuthorType,
+//       //need to change this to match db requirements
+//       resolve: async (book) => {
+//         let fetched = await Author.findOne({ books: book._id })
+//         counter += 1;
+//         //console.log(counter)
+//         return fetched;
+//       }
+//     }
+//   })
+// })
+
 const AuthorType = new GraphQLObjectType({
   name: 'Author',
   description: 'This represents an author of a book',
@@ -36,11 +80,30 @@ const AuthorType = new GraphQLObjectType({
     lastName: { type: GraphQLNonNull(GraphQLString) },
     books: {
       type: new GraphQLList(BookType),
-      resolve: async (author) => {
-        let fetched = await Book.find({ Author: author._id })
-        counter += 1;
-        //console.log(fetched)
-        return fetched;
+      resolve: async (author, _, context) => {
+        if (context.cachedData.length === 0) {
+          counter += 1;
+          return await Book.find({ Author: author._id })
+        }
+        else {
+          const arr = [];
+          for (let i = 0; i < context.cachedData.length; i++) {
+            const book = context.cachedData[i]
+            for (let j = 0; j < author.books.length; j++) {
+              const authBook = author.books[j];
+              if (authBook.toString() === book._id.toString()) {
+                arr.push(book);
+              }
+            }
+          }
+          if (arr.length !== author.books.length) {
+            counter += 1
+            return await Book.find({ Author: author._id })
+          }
+          setTimeout(() => console.log('timed out'), 0)
+
+          return arr;
+        }
       }
     }
   })
@@ -55,19 +118,37 @@ const BookType = new GraphQLObjectType({
     Author: {
       type: AuthorType,
       //need to change this to match db requirements
-      resolve: async (book) => {
-        let fetched = await Author.findOne({ books: book._id })
-        counter += 1;
-        //console.log(counter)
-        return fetched;
+      resolve: async (book, _, context) => {
+
+        if (context.cachedData.length === 0) {
+          counter += 1
+          return await Author.findOne({ books: book._id });
+        }
+        else {
+
+          for (let i = 0; i < context.cachedData.length; i++) {
+            const author = context.cachedData[i]
+            for (let j = 0; j < author.books.length; j++) {
+              const authBook = author.books[j];
+              if (authBook.toString() === book._id.toString()) return author;
+
+            }
+          }
+          counter += 1
+
+
+          return await Author.findOne({ books: book._id });
+        }
       }
     }
   })
 })
 
+
 const RootQueryType = new GraphQLObjectType({
   name: 'Query',
   description: 'Root Query',
+  context: () => console.log('hello'),
   fields: () => ({
     book: {
       type: BookType,
@@ -86,9 +167,21 @@ const RootQueryType = new GraphQLObjectType({
       type: new GraphQLList(BookType),
       description: 'List of Books',
       //query db in resolve instead of returning the books object
-      resolve: async () => {
+      resolve: async (parent, other, context) => {
+        //console.log(context.authorLoader)
         let fetched = await Book.find({});
         counter += 1;
+        let keys = [];
+        fetched.forEach(key => keys.push(key.Author))
+        console.log(context.cachedData)
+
+        context.cachedData = await context.authorLoader.loadAll(keys)
+        if (context.cachedData.length !== 0) {
+          counter += 1;
+        };
+        //console.log('count', counter);
+        //console.log('data collected')
+        setTimeout(() => context.cachedData = [], 0);
         return fetched;
       }
     },
@@ -100,6 +193,7 @@ const RootQueryType = new GraphQLObjectType({
       },
       //query db in resolve instead of returning the books object
       resolve: async (parent, args) => {
+        context()
         counter += 1;
         return Author.findOne({ _id: args.id })
       }
@@ -108,9 +202,18 @@ const RootQueryType = new GraphQLObjectType({
       type: new GraphQLList(AuthorType),
       description: 'List of all Authors',
       //query db in resolve instead of returning the books object
-      resolve: async () => {
+      resolve: async (parent, _, context) => {
         let fetched = await Author.find({});
         counter += 1;
+        let keys = [];
+        fetched.forEach(key => keys.push(...key.books))
+
+        context.cachedData = await context.bookLoader.loadAll(keys)
+        if (context.cachedData.length !== 0) {
+          counter += 1;
+        }
+
+
         return fetched;
       }
     }
@@ -123,7 +226,12 @@ const schema = new GraphQLSchema({
 
 app.use('/graphql', graphqlHTTP({
   schema: schema,
-  graphiql: true
+  graphiql: true,
+  context: {
+    authorLoader: AuthorLoader(),
+    bookLoader: BookLoader(),
+    cachedData: []
+  },
 }))
 
 const uri = 'mongodb+srv://cachiql:cache@cachiql.pypfo.mongodb.net/cachiql?retryWrites=true&w=majority';
@@ -134,41 +242,3 @@ mongoose.connect(uri, options)
     throw error;
   });
 
-
-  // const RootMutationType = new GraphQLObjectType({
-//   name: 'Mutations',
-//   description: 'Root Mutation',
-//   fields: () => ({
-//     addBook: {
-//       type: BookType,
-//       description: 'Add a Book',
-//       args: {
-//         name: { type: GraphQLNonNull(GraphQLString) },
-//         authorid: { type: GraphQLNonNull(GraphQLInt) }
-//       },
-//       resolve: async (parent, args) => {
-//         const statement = 'insert into books (name, authorid) values ($1, $2) returning *';
-//         const values = [args.name, args.authorid];
-//         const data = await db.query(statement, values);
-//         return data.rows[0];
-//       }
-//     },
-//     addAuthor: {
-//       type: AuthorType,
-//       description: 'Add an Author',
-//       args: {
-//         name: { type: GraphQLNonNull(GraphQLString) }
-//       },
-//       //change this to db query
-//       resolve: async (parent, args) => {
-//         // const author = { id: authors.length + 1, name: args.name };
-//         // authors.push(author);
-//         // return author;
-//         const statement = 'insert into authors (name) values ($1) returning *';
-//         const values = [args.name];
-//         const data = await db.query(statement, values);
-//         return data.rows[0];
-//       }
-//     }
-//   })
-// })
