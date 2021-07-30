@@ -42,8 +42,8 @@ class Cachiql {
         'The value passed into the loadAll() function is not an array'
       )
     }
-    this.batch = null;
-    console.log('this batch', this.batch)
+
+    if(this.batch !== null) clearBatch(this.batch)
 
     function removeDuplicates(data, key) {
       const arr = []
@@ -55,7 +55,7 @@ class Cachiql {
             included = true;
           }
         }
-        if(!included) arr.push(el)
+        if (!included) arr.push(el)
       })
       return arr;
     }
@@ -83,6 +83,14 @@ const batch = {
   cacheHits: []
 }
 
+const clearBatch = (batch) => {
+  batch.hasSent = false;
+  batch.keys = []
+  batch.cbs = []
+  cacheHits = []
+
+}
+
 const getBatch = (cachiql) => {
   cachiql.batch = batch;
   //sendBatch(cachiql, cachiql.batch)
@@ -91,7 +99,6 @@ const getBatch = (cachiql) => {
 
 const sendBatch = (cachiql, batch) => {
   batch.hasSent = true;
-  console.log(batch.keys.length)
 
   if (batch.keys.length === 0) {
     console.log('i am in the return for the length issue in sendBatch')

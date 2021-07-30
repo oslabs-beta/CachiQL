@@ -23,4 +23,4 @@ const batchBooks = async (ids) => {
   }
 };
 
-module.exports = () => new Cachiql(batchBooks);
+module.exports = batchBooks;
