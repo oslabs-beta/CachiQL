@@ -62,7 +62,6 @@ export const Graphiql: React.FC<Props> = ({
               body: JSON.stringify(graphQLParams),
               credentials: 'same-origin'
             });
-            getCounter();
             console.log('clicked', graphQLParams);
             return data.json().catch(() => {
               data.text();
@@ -70,9 +69,9 @@ export const Graphiql: React.FC<Props> = ({
           }}
         >
           <GraphiQL.Toolbar>
-            // GraphiQL.ToolbarButton usage
+            // GraphiQL.Counter
             <GraphiQL.ToolbarButton
-              onClick={() => onClickToolbarButton()}
+              onClick={() => getCounter()}
               title="ToolbarButton"
               label="Click Me as well!"
             />
