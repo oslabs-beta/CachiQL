@@ -21,7 +21,6 @@ export const Graphiql: React.FC<Props> = ({
   recentQueries,
   setRecentQueries
 }) => {
-  const [data, getData] = useState([]);
 
   // useEffect(() => {
   //   console.log('i am using effect');
@@ -37,10 +36,10 @@ export const Graphiql: React.FC<Props> = ({
   const getCounter = () => {
     fetch('/counter')
       .then((res) => res.json())
-      .then((res) => {
-        console.log('Am I getting data?', res);
-        const arr = [...data, res];
-        console.log(arr);
+      .then((data) => {
+        console.log('Am I getting data?', data);
+        setRecentQueries([...recentQueries, ...data] || [...recentQueries]);
+        console.log("Did I set state?", recentQueries);
       });
   };
 
@@ -69,14 +68,12 @@ export const Graphiql: React.FC<Props> = ({
           }}
         >
           <GraphiQL.Toolbar>
-            // GraphiQL.Counter
+            Compare CachiQL
             <GraphiQL.ToolbarButton
               onClick={() => getCounter()}
               title="ToolbarButton"
-              label="Click Me as well!"
+              label="Display Results"
             />
-            // Some other possible toolbar items
-            <button name="GraphiQLButton">Click Me</button>
           </GraphiQL.Toolbar>
         </GraphiQL>
       </div>
