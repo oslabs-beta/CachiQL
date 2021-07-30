@@ -7,12 +7,12 @@ import { makeStyles } from '@material-ui/core/styles';
 // import Typography from '@material-ui/core/Typography';
 // import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
-import Avatar from '@material-ui/core/Avatar';
+// import Avatar from '@material-ui/core/Avatar';
 // import { Avatars } from './Avatars';
-import Kaden from '../../assets/kadenFinal.svg';
-import Vanessa from '../../assets/vanessaFinal.svg';
-import Eddie from '../../assets/eddieFinal.svg';
-import Fahad from '../../assets/fahadFinal.svg';
+import Kaden from '../../assets/resizedKaden-svg.svg';
+import Vanessa from '../../assets/resizedVanessa-svg.svg';
+import Eddie from '../../assets/resizedEddie-svg.svg';
+import Fahad from '../../assets/resizedFahad-svg.svg';
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -33,8 +33,20 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1
   },
   svgIcon: {
-    transform: 'scale(1.0)',
-    
+    transform: 'scale(1.0)'
+  },
+  cardMedia: {
+    borderRadius: '50%',
+    margin: '28px'
+  },
+  cardMedia2: {
+    borderRadius: '50%',
+    margin: '38px',
+    paddingRight: '81px'
+  },
+  container: {
+    paddingTop: '20px',
+    alignContent: 'space-between'
   }
 }));
 
@@ -42,15 +54,15 @@ export const Linkage = () => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Container>
+      <Container className= {classes.container}>
         <Card>
-          <Kaden className={classes.svgIcon} />
-          <Vanessa className={classes.svgIcon} />
-          <Eddie className={classes.svgIcon} />
-          <Fahad className={classes.svgIcon} />
+          <Kaden className={classes.cardMedia} />
+          <Vanessa className={classes.cardMedia} />
+          <Eddie className={classes.cardMedia} />
+          <Fahad className={classes.cardMedia} />
         </Card>
         <Card>
-          <IconButton
+          <IconButton className= {classes.cardMedia2}
             aria-label="Linkedin.com"
             onClick={() =>
               window.open('https://www.linkedin.com/in/kaden-johnson/')
@@ -58,7 +70,7 @@ export const Linkage = () => {
           >
             <LinkedInIcon fontSize="large" />
           </IconButton>
-          <IconButton
+          <IconButton className= {classes.cardMedia2}
             aria-label="Linkedin.com"
             onClick={() =>
               window.open('https://www.linkedin.com/in/vanessa-lutz/')
@@ -66,7 +78,7 @@ export const Linkage = () => {
           >
             <LinkedInIcon fontSize="large" />
           </IconButton>
-          <IconButton
+          <IconButton className= {classes.cardMedia2}
             aria-label="Linkedin.com"
             onClick={() =>
               window.open('http://www.linkedin.com/in/eddy-zapata-510805203')
@@ -74,7 +86,7 @@ export const Linkage = () => {
           >
             <LinkedInIcon fontSize="large" />
           </IconButton>
-          <IconButton
+          <IconButton className={classes.cardMedia2}
             aria-label="Linkedin.com"
             onClick={() =>
               window.open('http://www.linkedin.com/in/fahadmshaikh')
@@ -84,25 +96,25 @@ export const Linkage = () => {
           </IconButton>
         </Card>
         <Card>
-          <IconButton
+          <IconButton className={classes.cardMedia2}
             aria-label="github.com"
             onClick={() => window.open('https://github.com/Kadenj117')}
           >
             <GitHubIcon fontSize="large" />
           </IconButton>
-          <IconButton
+          <IconButton className= {classes.cardMedia2}
             aria-label="github.com"
             onClick={() => window.open('https://github.com/vanessalutz')}
           >
             <GitHubIcon fontSize="large" />
           </IconButton>
-          <IconButton
+          <IconButton className= {classes.cardMedia2}
             aria-label="github.com"
             onClick={() => window.open('http://github.com/zapata124')}
           >
             <GitHubIcon fontSize="large" />
           </IconButton>
-          <IconButton
+          <IconButton className= {classes.cardMedia2}
             aria-label="github.com"
             onClick={() => window.open('https://github.com/fahdie')}
           >
