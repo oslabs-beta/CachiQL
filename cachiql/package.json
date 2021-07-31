@@ -14,7 +14,7 @@
     "graphql"
   ],
   "author": "kaden johnson, vanessa lutz, fahad shaikh, eddy zapata.",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/oslabs-beta/CachiQL/issues"
   },
