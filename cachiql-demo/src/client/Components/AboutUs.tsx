@@ -14,6 +14,7 @@ import Kaden from '../../assets/resizedKaden-svg.svg';
 import Vanessa from '../../assets/resizedVanessa-svg.svg';
 import Eddy from '../../assets/resizedEddie-svg.svg';
 import Fahad from '../../assets/resizedFahad-svg.svg';
+import {Grid} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   card: {
     height: '100%',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
     alignContent: 'center'
   },
@@ -54,87 +55,91 @@ export const AboutUs = () => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Container className={classes.container}>
-        <Card>
-          <Kaden className={classes.cardMedia} />
-          <Typography>Kaden Johnson</Typography>
-          <IconButton
-            className={classes.cardMedia2}
-            aria-label="Linkedin.com"
-            onClick={() =>
-              window.open('https://www.linkedin.com/in/kaden-johnson/')
-            }
-          >
-            <LinkedInIcon fontSize="large" />
-          </IconButton>
-          <IconButton
-            className={classes.cardMedia2}
-            aria-label="github.com"
-            onClick={() => window.open('https://github.com/Kadenj117')}
-          >
-            <GitHubIcon fontSize="large" />
-          </IconButton>
-        </Card>
-        <Card>
-          <Vanessa className={classes.cardMedia} />
-          <Typography>Vanessa Lutz</Typography>
-          <IconButton
-            className={classes.cardMedia2}
-            aria-label="Linkedin.com"
-            onClick={() =>
-              window.open('https://www.linkedin.com/in/vanessa-lutz/')
-            }
-          >
-            <LinkedInIcon fontSize="large" />
-          </IconButton>
-          <IconButton
-            className={classes.cardMedia2}
-            aria-label="github.com"
-            onClick={() => window.open('https://github.com/vanessalutz')}
-          >
-            <GitHubIcon fontSize="large" />
-          </IconButton>
-        </Card>
-        <Card>
-          <Eddy className={classes.cardMedia} />
-          <Typography>Eddy Zapata</Typography>
-          <IconButton
-            className={classes.cardMedia2}
-            aria-label="Linkedin.com"
-            onClick={() => window.open('https://www.linkedin.com/in/zapata124')}
-          >
-            <LinkedInIcon fontSize="large" />
-          </IconButton>
-          <IconButton
-            className={classes.cardMedia2}
-            aria-label="github.com"
-            onClick={() =>
-              window.open('http://www.linkedin.com/in/eddy-zapata-510805203')
-            }
-          >
-            <GitHubIcon fontSize="large" />
-          </IconButton>
-        </Card>
-        <Card>
-          <Fahad className={classes.cardMedia} />
-          <Typography>Fahad Shaikh</Typography>
-          <IconButton
-            className={classes.cardMedia2}
-            aria-label="Linkedin.com"
-            onClick={() =>
-              window.open('https://www.linkedin.com/in/fahadmshaikh/')
-            }
-          >
-            <LinkedInIcon fontSize="large" />
-          </IconButton>
-          <IconButton
-            className={classes.cardMedia2}
-            aria-label="github.com"
-            onClick={() => window.open('https://github.com/fahdie')}
-          >
-            <GitHubIcon fontSize="large" />
-          </IconButton>
-        </Card>
+      <Container>
+        <Grid direction="row">
+          <Card>
+            <Kaden className={classes.cardMedia} />
+            <Typography>Kaden Johnson</Typography>
+            <IconButton
+              className={classes.cardMedia2}
+              aria-label="Linkedin.com"
+              onClick={() =>
+                window.open('https://www.linkedin.com/in/kaden-johnson/')
+              }
+            >
+              <LinkedInIcon fontSize="large" />
+            </IconButton>
+            <IconButton
+              className={classes.cardMedia2}
+              aria-label="github.com"
+              onClick={() => window.open('https://github.com/Kadenj117')}
+            >
+              <GitHubIcon fontSize="large" />
+            </IconButton>
+          </Card>
+          <Card>
+            <Vanessa className={classes.cardMedia} />
+            <Typography>Vanessa Lutz</Typography>
+            <IconButton
+              className={classes.cardMedia2}
+              aria-label="Linkedin.com"
+              onClick={() =>
+                window.open('https://www.linkedin.com/in/vanessa-lutz/')
+              }
+            >
+              <LinkedInIcon fontSize="large" />
+            </IconButton>
+            <IconButton
+              className={classes.cardMedia2}
+              aria-label="github.com"
+              onClick={() => window.open('https://github.com/vanessalutz')}
+            >
+              <GitHubIcon fontSize="large" />
+            </IconButton>
+          </Card>
+          <Card>
+            <Eddy className={classes.cardMedia} />
+            <Typography>Eddy Zapata</Typography>
+            <IconButton
+              className={classes.cardMedia2}
+              aria-label="Linkedin.com"
+              onClick={() =>
+                window.open('https://www.linkedin.com/in/zapata124')
+              }
+            >
+              <LinkedInIcon fontSize="large" />
+            </IconButton>
+            <IconButton
+              className={classes.cardMedia2}
+              aria-label="github.com"
+              onClick={() =>
+                window.open('http://www.linkedin.com/in/eddy-zapata-510805203')
+              }
+            >
+              <GitHubIcon fontSize="large" />
+            </IconButton>
+          </Card>
+          <Card>
+            <Fahad className={classes.cardMedia} />
+            <Typography>Fahad Shaikh</Typography>
+            <IconButton
+              className={classes.cardMedia2}
+              aria-label="Linkedin.com"
+              onClick={() =>
+                window.open('https://www.linkedin.com/in/fahadmshaikh/')
+              }
+            >
+              <LinkedInIcon fontSize="large" />
+            </IconButton>
+            <IconButton
+              className={classes.cardMedia2}
+              aria-label="github.com"
+              onClick={() => window.open('https://github.com/fahdie')}
+            >
+              <GitHubIcon fontSize="large" />
+            </IconButton>
+          </Card>
+        </Grid>
       </Container>
     </React.Fragment>
   );
