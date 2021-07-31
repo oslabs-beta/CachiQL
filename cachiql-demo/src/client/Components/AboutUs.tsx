@@ -33,13 +33,12 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     flexGrow: 1
   },
-  
+
   svgIcon: {
     transform: 'scale(1.0)'
   },
   cardMedia: {
     borderRadius: '50%'
-    
   },
   cardMedia2: {
     borderRadius: '50%',
@@ -102,16 +101,16 @@ export const AboutUs = () => {
           <IconButton
             className={classes.cardMedia2}
             aria-label="Linkedin.com"
-            onClick={() =>
-              window.open('https://www.linkedin.com/in/zapata124')
-            }
+            onClick={() => window.open('https://www.linkedin.com/in/zapata124')}
           >
             <LinkedInIcon fontSize="large" />
           </IconButton>
           <IconButton
             className={classes.cardMedia2}
             aria-label="github.com"
-            onClick={() => window.open('http://www.linkedin.com/in/eddy-zapata-510805203')}
+            onClick={() =>
+              window.open('http://www.linkedin.com/in/eddy-zapata-510805203')
+            }
           >
             <GitHubIcon fontSize="large" />
           </IconButton>
