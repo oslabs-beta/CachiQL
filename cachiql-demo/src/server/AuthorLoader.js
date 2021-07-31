@@ -15,7 +15,7 @@ const Author = require('./models/author');
 
 const batchAuthors = async (ids) => {
   try {
-    const authors = await Author.find({ '_id': { $in: ids } });
+    const authors = await Author.find({ _id: { $in: ids } });
     //return formatResult(authors, ids);
     return authors;
   } catch (err) {
@@ -23,4 +23,4 @@ const batchAuthors = async (ids) => {
   }
 };
 
-module.exports = () => new Cachiql(batchAuthors);
+module.exports = batchAuthors;

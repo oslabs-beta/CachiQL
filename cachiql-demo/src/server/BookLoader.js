@@ -15,7 +15,7 @@ const Book = require('./models/book');
 
 const batchBooks = async (ids) => {
   try {
-    const books = await Book.find({ '_id': { $in: ids } });
+    const books = await Book.find({ _id: { $in: ids } });
     //return formatResult(authors, ids);
     return books;
   } catch (err) {
@@ -23,4 +23,4 @@ const batchBooks = async (ids) => {
   }
 };
 
-module.exports = () => new Cachiql(batchBooks);
+module.exports = batchBooks;
