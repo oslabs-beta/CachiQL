@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FloatNavigationMenuStyle } from './Components/Navigation';
 import { Graphiql } from './Components/GraphiQL';
 import { BuildBarChart } from './Components/BarChart';
@@ -6,10 +6,8 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
-import CachiQLLogo from '../../dist/assets/cachiql_(1).svg';
 import { makeStyles } from '@material-ui/core/styles';
 import { Metrics } from './Components/Metrics';
-import { Queries } from './Components/Queries';
 import clsx from 'clsx';
 import { Banner } from './Components/Banner';
 import { WhyCachiQL } from './Components/Cards';
@@ -35,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const App = () => {
+const App: React.FC = () => {
+  const [recentQueries, setRecentQueries] = useState<any[]>([]);
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
@@ -45,10 +44,10 @@ const App = () => {
       <Banner />
       <WhyCachiQL />
       <Demo />
-      <Graphiql />
+      <Graphiql {...{ recentQueries, setRecentQueries }} />
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>
-        <Grid item xs={12}>
+          <Grid item xs={12}>
             <Paper className={classes.paper}>
               <Stepper />
             </Paper>
@@ -56,19 +55,13 @@ const App = () => {
           {/* BuildBarChart */}
           <Grid item xs={12} md={8} lg={9}>
             <Paper className={fixedHeightPaper}>
-              <BuildBarChart />
+              <BuildBarChart {...{ recentQueries, setRecentQueries }} />
             </Paper>
           </Grid>
           {/* Metrics */}
           <Grid item xs={12} md={4} lg={3}>
             <Paper className={fixedHeightPaper}>
-              <Metrics />
-            </Paper>
-          </Grid>
-          {/* Recent Queries */}
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <Queries />
+              <Metrics {...{ recentQueries, setRecentQueries }} />
             </Paper>
           </Grid>
         </Grid>

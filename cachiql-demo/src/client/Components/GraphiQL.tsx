@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import GraphiQL from 'graphiql';
 import styled from 'styled-components';
 import 'graphiql/graphiql.min.css';
+import { execute } from 'graphql';
 
 const Stylegraphiql = styled.div`
   margin: auto;
@@ -12,28 +13,22 @@ const Stylegraphiql = styled.div`
   }
 `;
 
-export const Graphiql = () => {
-  // const [count, setCount] = useState(false);
+interface Props {
+  recentQueries: any[];
+  setRecentQueries: React.Dispatch<React.SetStateAction<any[]>>;
+}
+export const Graphiql: React.FC<Props> = ({
+  recentQueries,
+  setRecentQueries
+}) => {
+  const getCounter = () => {
+    fetch('/counter')
+      .then((res) => res.json())
+      .then((data) => {
+        setRecentQueries([...recentQueries, ...data] || [...recentQueries]);
+      });
+  };
 
-  // useEffect(() => {
-  //   console.log('i am using effect');
-  //   fetch('/counter')
-  //     .then((data) => data.json())
-  //     .then((data) => {
-  //       console.log('this is the data', data);
-  //       setCount(data || []);
-  //     });
-  // }, []);
-  // console.log('i am counting ', count);
-
-  // if (count === true) {
-  //   fetch('/counter')
-  //     .then((data) => data.json())
-  //     .then((data) => {
-  //       console.log('Am I getting data?', data);
-  //       setCount(false);
-  //     });
-  // }
   return (
     <Stylegraphiql>
       <div className="graphiql">
@@ -48,12 +43,20 @@ export const Graphiql = () => {
               body: JSON.stringify(graphQLParams),
               credentials: 'same-origin'
             });
-            // setCount(true);
             return data.json().catch(() => {
               data.text();
             });
           }}
-        />
+        >
+          <GraphiQL.Toolbar>
+            Compare CachiQL
+            <GraphiQL.ToolbarButton
+              onClick={() => getCounter()}
+              title="ToolbarButton"
+              label="Display Results"
+            />
+          </GraphiQL.Toolbar>
+        </GraphiQL>
       </div>
     </Stylegraphiql>
   );
