@@ -15,17 +15,11 @@ const {
 const Author = require('./models/author');
 const Book = require('./models/book');
 const app = express();
-<<<<<<< HEAD
-const path = require('path');
-
-app.use(express.static(path.join(__dirname, '../assets')));
-=======
 const cache = require('memory-cache');
 const AuthorLoader = require('./AuthorLoader')
 const BookLoader = require('./BookLoader')
 //const {AuthorType, BookType} = require('./resolvercache')
 
->>>>>>> dev
 
 let counter = 0;
 let cacheL = {};

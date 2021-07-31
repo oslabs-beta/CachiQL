@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 // import Avatar from '@material-ui/core/Avatar';
 // import { Avatars } from './Avatars';
+import Typography from '@material-ui/core/Typography';
 import Kaden from '../../assets/resizedKaden-svg.svg';
 import Vanessa from '../../assets/resizedVanessa-svg.svg';
 import Eddie from '../../assets/resizedEddie-svg.svg';
@@ -54,15 +55,17 @@ export const Linkage = () => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Container className= {classes.container}>
+      <Container className={classes.container}>
         <Card>
           <Kaden className={classes.cardMedia} />
+          <Typography>Kaden Johnson</Typography>
           <Vanessa className={classes.cardMedia} />
           <Eddie className={classes.cardMedia} />
           <Fahad className={classes.cardMedia} />
         </Card>
         <Card>
-          <IconButton className= {classes.cardMedia2}
+          <IconButton
+            className={classes.cardMedia2}
             aria-label="Linkedin.com"
             onClick={() =>
               window.open('https://www.linkedin.com/in/kaden-johnson/')
@@ -70,7 +73,8 @@ export const Linkage = () => {
           >
             <LinkedInIcon fontSize="large" />
           </IconButton>
-          <IconButton className= {classes.cardMedia2}
+          <IconButton
+            className={classes.cardMedia2}
             aria-label="Linkedin.com"
             onClick={() =>
               window.open('https://www.linkedin.com/in/vanessa-lutz/')
@@ -78,7 +82,8 @@ export const Linkage = () => {
           >
             <LinkedInIcon fontSize="large" />
           </IconButton>
-          <IconButton className= {classes.cardMedia2}
+          <IconButton
+            className={classes.cardMedia2}
             aria-label="Linkedin.com"
             onClick={() =>
               window.open('http://www.linkedin.com/in/eddy-zapata-510805203')
@@ -86,7 +91,8 @@ export const Linkage = () => {
           >
             <LinkedInIcon fontSize="large" />
           </IconButton>
-          <IconButton className={classes.cardMedia2}
+          <IconButton
+            className={classes.cardMedia2}
             aria-label="Linkedin.com"
             onClick={() =>
               window.open('http://www.linkedin.com/in/fahadmshaikh')
@@ -96,25 +102,29 @@ export const Linkage = () => {
           </IconButton>
         </Card>
         <Card>
-          <IconButton className={classes.cardMedia2}
+          <IconButton
+            className={classes.cardMedia2}
             aria-label="github.com"
             onClick={() => window.open('https://github.com/Kadenj117')}
           >
             <GitHubIcon fontSize="large" />
           </IconButton>
-          <IconButton className= {classes.cardMedia2}
+          <IconButton
+            className={classes.cardMedia2}
             aria-label="github.com"
             onClick={() => window.open('https://github.com/vanessalutz')}
           >
             <GitHubIcon fontSize="large" />
           </IconButton>
-          <IconButton className= {classes.cardMedia2}
+          <IconButton
+            className={classes.cardMedia2}
             aria-label="github.com"
             onClick={() => window.open('http://github.com/zapata124')}
           >
             <GitHubIcon fontSize="large" />
           </IconButton>
-          <IconButton className= {classes.cardMedia2}
+          <IconButton
+            className={classes.cardMedia2}
             aria-label="github.com"
             onClick={() => window.open('https://github.com/fahdie')}
           >

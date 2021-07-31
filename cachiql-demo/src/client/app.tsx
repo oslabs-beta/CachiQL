@@ -16,7 +16,8 @@ import { WhyCachiQL } from './Components/Cards';
 import { Demo } from './Components/Demologo';
 import Stepper from './Components/Stepper';
 import { Linkage } from './Components/PersonalLinks';
-import { Avatars } from './Components/Avatars'
+import { Avatars } from './Components/Avatars';
+import { AboutUs } from './Components/AboutUs';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,8 +75,7 @@ const App = () => {
             </Paper>
           </Grid>
         </Grid>
-        <Linkage></Linkage>
-        
+        <AboutUs></AboutUs>
       </Container>
     </div>
   );
