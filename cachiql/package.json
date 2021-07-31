@@ -6,6 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Vanessa Lutz, Fahad Shaikh, Eddy Zapata, Kaden Johnson",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oslabs-beta/CachiQL.git"
+  },
+  "keywords": [
+    "graphql"
+  ],
+  "author": "Kaden Johnson, Vanessa Lutz, Fahad Shaikh, Eddy Zapata.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/CachiQL/issues"
+  },
+  "homepage": "https://github.com/oslabs-beta/CachiQL#readme"
 }
