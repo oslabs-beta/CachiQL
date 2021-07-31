@@ -1,0 +1,11 @@
+{
+  "name": "cachiql",
+  "version": "1.0.0",
+  "description": "Batching and caching solution for Graphql",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vanessa Lutz, Fahad Shaikh, Eddy Zapata, Kaden Johnson",
+  "license": "ISC"
+}
