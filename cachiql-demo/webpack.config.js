@@ -30,6 +30,9 @@ module.exports = {
       '/counter': {
         target: 'http://localhost:3000'
       },
+      '/assets': {
+        target: 'http://localhost:3000'
+      }
     }
   },
   module: {
@@ -53,7 +56,7 @@ module.exports = {
         use: ['@svgr/webpack'],
       },
       {
-        test: /\.(gif|png|jpe?g)$/i,
+        test: /\.(gif|png|jpeg|jpg)$/i,
         use: [
           'file-loader',
           {

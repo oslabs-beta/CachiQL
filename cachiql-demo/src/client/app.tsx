@@ -13,6 +13,9 @@ import { Banner } from './Components/Banner';
 import { WhyCachiQL } from './Components/Cards';
 import { Demo } from './Components/Demologo';
 import Stepper from './Components/Stepper';
+import { Linkage } from './Components/PersonalLinks';
+import { Avatars } from './Components/Avatars';
+import { AboutUs } from './Components/AboutUs';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,6 +68,7 @@ const App: React.FC = () => {
             </Paper>
           </Grid>
         </Grid>
+        <AboutUs></AboutUs>
       </Container>
     </div>
   );
