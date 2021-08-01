@@ -7,7 +7,9 @@ import TrendingDownIcon from '@material-ui/icons/TrendingDown';
 
 const useStyles = makeStyles({
   depositContext: {
-    flex: 1
+    flex: 1,
+    paddingTop: '30px',
+    paddingBottom: '30px'
   },
   sparkle: {
     position: 'relative'
@@ -29,27 +31,25 @@ export const Metrics: React.FC<Props> = ({
   setRecentQueries
 }) => {
   const classes = useStyles();
-// if (!recentQueries[0]?.CachiQL){
-//   return {'0'};
-// }
+
   return (
     <React.Fragment>
       <TitleGraph>CachiQL Metrics</TitleGraph>
       <span className={classes.sparkle}>
         <Typography component="p" variant="h4">
-          {recentQueries[0]?.CachiQL}
+          {recentQueries[0]?.CachiQL ?? 'Make A Query'}
           <Sparkle color="#3751e0" />
         </Typography>
       </span>
       <Typography color="textSecondary" className={classes.depositContext}>
-        CachiQL Queries
+        With CachiQL
       </Typography>
       <TrendingDownIcon className={classes.trendIcon} />
       <Typography component="p" variant="h4">
-        {recentQueries[0]?.GraphQL}
+        {recentQueries[0]?.GraphQL ?? 'Make A Query'}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-        GraphQL Queries
+        Standard GraphQL Queries
       </Typography>
     </React.Fragment>
   );
