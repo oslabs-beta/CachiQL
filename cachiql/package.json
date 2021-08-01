@@ -1,7 +1,7 @@
 {
   "name": "cachiql",
   "version": "1.0.0",
-  "description": "batching and caching solution for graphql library ",
+  "description": "Batching and caching solution for Graphql",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,8 +13,8 @@
   "keywords": [
     "graphql"
   ],
-  "author": "kaden johnson, vanessa lutz, fahad shaikh, eddy zapata.",
-  "license": "ISC",
+  "author": "Kaden Johnson, Vanessa Lutz, Fahad Shaikh, Eddy Zapata.",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/oslabs-beta/CachiQL/issues"
   },

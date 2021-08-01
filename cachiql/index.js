@@ -1,4 +1,4 @@
-// A function wich will return a promise
+// A function which will return a promise
 // INPUT: array of values
 // OUTPUT: promise of arrays values or errors
 const loader = (keys) => {
