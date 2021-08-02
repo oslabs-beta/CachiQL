@@ -110,7 +110,6 @@ export const AboutUs = () => {
                     <GitHubIcon fontSize="large" />
                   </IconButton>
                 </div>
-
               </Card>
             </Grid>
           ))}
