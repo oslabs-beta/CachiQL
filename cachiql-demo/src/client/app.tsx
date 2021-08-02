@@ -13,9 +13,8 @@ import { Banner } from './Components/Banner';
 import { WhyCachiQL } from './Components/Cards';
 import { Demo } from './Components/Demologo';
 import Stepper from './Components/Stepper';
-import { Linkage } from './Components/PersonalLinks';
-import { Avatars } from './Components/Avatars';
 import { AboutUs } from './Components/AboutUs';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
   },
   fixedHeight: {
     height: 380
+  },
+  metrics: {
+    alignItems: 'center'
   }
 }));
 
@@ -40,6 +42,11 @@ const App: React.FC = () => {
   const [recentQueries, setRecentQueries] = useState<any[]>([]);
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const metricsPaper = clsx(
+    classes.paper,
+    classes.fixedHeight,
+    classes.metrics
+  );
   return (
     <div>
       <CssBaseline />
@@ -63,12 +70,12 @@ const App: React.FC = () => {
           </Grid>
           {/* Metrics */}
           <Grid item xs={12} md={4} lg={3}>
-            <Paper className={fixedHeightPaper}>
+            <Paper className={metricsPaper}>
               <Metrics {...{ recentQueries, setRecentQueries }} />
             </Paper>
           </Grid>
         </Grid>
-        <AboutUs></AboutUs>
+        <AboutUs />
       </Container>
     </div>
   );
