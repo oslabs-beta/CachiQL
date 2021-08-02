@@ -1,5 +1,8 @@
 # About CachiQL
 
+[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fcachiql)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Foslabs-beta%2FCachiQL)
+[![GitHub Stars](https://img.shields.io/github/stars/oslabs-beta/CachiQL)](https://github.com/oslabs-beta/CachiQL/stargazers)
+
 CachiQL is an ultra-lightweight library designed to batch and cache [graphql-js](https://github.com/graphql/graphql-js "GraphQL JS") queries to reduce calls to databases. Additionally, CachiQL is written in Javascript for use in Node.js.
 
 Note that batching and caching multiple data requests is not novel to Javascript and Node.js. Additionally, the inspiration behind CachiQL is to deeply understand the implementation of [DataLoader](https://github.com/graphql/dataloader "DataLoader GitHub"), which was created by [Lee Byron](https://github.com/leebyron "Lee Bryon GitHub") at Facebook to solve the common N +1 issue of a naive GraphQL server. Our team’s purpose is not to replace DataLoader but rather, to help others understand the rationale behind DataLoader and create a simplified and lightweight NPM package.
