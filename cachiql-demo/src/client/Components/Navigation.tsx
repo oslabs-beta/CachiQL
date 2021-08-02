@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Link } from 'gatsby'; // can be react-router-dom, reach router
 import { NavMenu, NavItem } from '@mui-treasury/components/menu/navigation';
 import { useFloatNavigationMenuStyles } from '@mui-treasury/styles/navigationMenu/float';
 import GitHubIcon from '@material-ui/icons/GitHub';
@@ -19,7 +18,9 @@ export const FloatNavigationMenuStyle = React.memo(
             <AutorenewIcon />
             MAGICAL CACHiQL
           </NavItem>
-          <NavItem>
+          <NavItem
+            onClick={() => window.open('https://www.npmjs.com/package/cachiql')}
+          >
             <GitHubIcon />
             NPM PACKAGE
           </NavItem>
@@ -29,7 +30,7 @@ export const FloatNavigationMenuStyle = React.memo(
           </NavItem>
           <NavItem>
             <RateReviewIcon />
-            REVIEWS
+            MEDIUM
           </NavItem>
           <NavItem>
             <InfoIcon />
