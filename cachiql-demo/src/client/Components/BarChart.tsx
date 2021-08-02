@@ -42,7 +42,7 @@ export const BuildBarChart: React.FC<Props> = ({ recentQueries, setRecentQueries
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="GraphQL" fill="#111425" />
+          <Bar dataKey="GraphQL" fill="#808080" />
           <Bar dataKey="CachiQL" fill="#3751e0" />
         </BarChart>
       </BarStyle>
