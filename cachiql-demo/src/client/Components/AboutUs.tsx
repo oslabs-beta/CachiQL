@@ -81,7 +81,7 @@ export const AboutUs = () => {
   return (
     <React.Fragment>
       <Container className={classes.cardGrid}>
-        <div align="center">
+        <div align="center" id="aboutus">
           <TeamCachiql className={classes.teamIcon} />
         </div>
         <Grid container spacing={5}>

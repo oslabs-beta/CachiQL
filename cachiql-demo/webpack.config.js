@@ -6,7 +6,7 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: ['@babel/polyfill', './src/client/index.tsx'],
-  mode: 'development',
+  mode: 'production',
   devtool: 'eval-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -79,7 +79,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/client/index.html'
+      template: './src/client/index.html',
+      inject: true,
+      filename: 'index.html'
     }),
     new MiniCssExtractPlugin(),
     new webpack.HotModuleReplacementPlugin(),
