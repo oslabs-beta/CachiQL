@@ -15,7 +15,6 @@ import { Demo } from './Components/Demologo';
 import Stepper from './Components/Stepper';
 import { AboutUs } from './Components/AboutUs';
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex'
