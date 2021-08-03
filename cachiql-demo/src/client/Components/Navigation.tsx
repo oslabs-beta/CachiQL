@@ -7,12 +7,14 @@ import AutorenewIcon from '@material-ui/icons/Autorenew';
 import RateReviewIcon from '@material-ui/icons/RateReview';
 import InfoIcon from '@material-ui/icons/Info';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { Link } from '@material-ui/core';
+
 
 export const FloatNavigationMenuStyle = React.memo(
   function FloatNavigationMenu() {
     return (
       <>
-      <CssBaseline />
+        <CssBaseline />
         <NavMenu gutter={1} useStyles={useFloatNavigationMenuStyles}>
           <NavItem active>
             <AutorenewIcon />
@@ -24,15 +26,15 @@ export const FloatNavigationMenuStyle = React.memo(
             <GitHubIcon />
             NPM PACKAGE
           </NavItem>
-          <NavItem>
-            <OndemandVideoIcon />
-            DEMO
+          <NavItem href='#demo'>
+              <OndemandVideoIcon />
+              DEMO
           </NavItem>
           <NavItem>
             <RateReviewIcon />
             MEDIUM
           </NavItem>
-          <NavItem>
+          <NavItem href='#aboutus'>
             <InfoIcon />
             ABOUT US
           </NavItem>
