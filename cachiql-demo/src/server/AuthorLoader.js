@@ -13,6 +13,7 @@ const Author = require('./models/author');
 //   return ids.map(id => authorMap[id]);
 // }
 
+// batches authors using ids. Returns Authors.
 const batchAuthors = async (ids) => {
   try {
     const authors = await Author.find({ _id: { $in: ids } });

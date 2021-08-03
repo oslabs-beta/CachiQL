@@ -1,3 +1,5 @@
+![Alt text](./cachiql-demo/src/assets/SmallCachiql.svg)
+
 # About CachiQL
 
 [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fcachiql)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Foslabs-beta%2FCachiQL)
