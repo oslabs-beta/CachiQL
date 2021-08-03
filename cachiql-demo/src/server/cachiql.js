@@ -42,7 +42,7 @@ class Cachiql {
 
   load(key) {
     // Error handling for invalid variable types
-    if (key == null || key === undefined) {
+    if (key == null || key === undefined || Array.isArray(key)) {
       throw new Error(
         'The key passed into the function is undefined please use valid key'
       );
@@ -137,7 +137,6 @@ const clearBatch = (batch) => {
   batch.hasSent = false;
   batch.keys = [];
   batch.cbs = [];
-  cacheHits = [];
 };
 
 /**

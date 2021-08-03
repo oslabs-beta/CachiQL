@@ -4,8 +4,8 @@
   "description": "Create the demo of the cachiql module",
   "main": "./src/client/index.tsx",
   "scripts": {
-    "start": "cross-env NODE_ENV=PRODUCTION node ../server/server.js",
-    "build": "cross-env NODE_ENV=PRODUCTION webpack",
+    "start": "cross-env NODE_ENV=PRODUCTION node ./src/server/server.js",
+    "build": "cross-env NODE_ENV=PRODUCTION webpack --progress",
     "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --open --hot \" \"nodemon ./src/server/server.js\"",
     "test": "jest",
     "lint": "eslint --ext .ts",
@@ -83,6 +83,7 @@
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "jest": "^27.0.6",
     "nodemon": "^2.0.12",
     "onchange": "^7.1.0",
     "prettier": "^2.3.2",
