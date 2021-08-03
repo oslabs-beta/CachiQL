@@ -1,8 +1,5 @@
 # About CachiQL
 
-![Alt text](./cachiql-demo/src/assets/blueBackCachiql.svg)
-<img src="https://github.com/oslabs-beta/CachiQL/blob/dev/cachiql-demo/src/assets/blueBackCachiql.svg">
-
 [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fcachiql)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Foslabs-beta%2FCachiQL)
 [![GitHub Stars](https://img.shields.io/github/stars/oslabs-beta/CachiQL)](https://github.com/oslabs-beta/CachiQL/stargazers)
 [![GitHub license](https://img.shields.io/github/license/oslabs-beta/CachiQL)](https://github.com/oslabs-beta/CachiQL/blob/dev/LICENSE)

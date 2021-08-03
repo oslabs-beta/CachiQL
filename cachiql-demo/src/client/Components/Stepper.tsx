@@ -37,9 +37,9 @@ function getStepContent(step) {
     case 0:
       return `First, enter in a query above using the GraphiQL interface provided. Then, receive your GraphQL test queries back.`;
     case 1:
-      return `Take note of the fetch time measurement from the database. Now, make the same query again to compare the speed of CachiQL.`;
+      return `Take note of the amount of fetches from the database. Now, make compare the magic of CachiQL.`;
     case 2:
-      return `Try out different GraphQL queries to measure the difference between the metrics calculations of cached versus uncached results.`;
+      return `Try out different GraphQL queries to measure the difference between the metrics calculations of fetch trips in your results.`;
     default:
       return 'Unknown step';
   }

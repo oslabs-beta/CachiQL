@@ -44,7 +44,7 @@ export const Demo = () => {
 
   return (
     <Paper className={classes.mainFeaturedPost}>
-      <div className={classes.overlay} />
+      <div className={classes.overlay} id='demo' />
       <Sparkle />
 
       <Grid container>
