@@ -1,4 +1,5 @@
 /*eslint-disable*/
+const { JsxEmit } = require('typescript');
 const { Cachiql } = require('../src/server/cachiql')
 
 const testLoader = () => {
@@ -12,24 +13,29 @@ const testLoader = () => {
 
 describe('CachiQL', () => {
   describe('load() functionality', () => {
-    it('should have a single value passed in', () => {
+    test('given a value the function should return a promise', async () => {
       const loader = new Cachiql(async keys => keys)
+      const nullVal = null;
 
-      const promise = loader.load(null);
-      const promise1 = loader.load(undefined);
-      const promise2 = loader.load([1]);
-      expect(promise).toEqual('The key passed into the function is undefined please use valid key');
-      expect(promise1).toEqual('The key passed into the function is undefined please use valid key');
-      expect(promise2).toEqual('The key passed into the function is undefined please use valid key');
+
+      expect(loader.load(1)).toBeInstanceOf(Promise);
+      expect(loader.load('testString1')).toBeInstanceOf(Promise);
+      expect(loader.load({ 1: 'TestObject' })).toBeInstanceOf(Promise);
+      // expect(loader.load(nullVal)).toThrow(Error)
 
     })
 
-    it('should return a promise of the given value', () => {
+    test('given a null value should return an error', async () => {
+      const loader = new Cachiql(async keys => keys)
+      const nullVal = null;
+      //jest.fn
+
+      //expect(await loader.load(nullVal)).toThrow('The key passed into the function is undefined please use valid key')
 
     })
   })
 
-  describe('LoadAll() function', () => {
+  describe('LoadAll() functionality', () => {
     it('Should return return a promise', async () => {
       const loader = new Cachiql(async keys => keys);
 
@@ -40,9 +46,39 @@ describe('CachiQL', () => {
     it('Should return no duplicates once promise is resolved', async () => {
       const loader = new Cachiql(async keys => keys);
 
+      const clearBatch = (batch) => {
+        batch.hasSent = false;
+        batch.keys = [];
+        batch.cbs = [];
+      }
+
       const promise = loader.loadAll([1, 2, 3, 4, 5, 3, 4, 2, 3])
       expect(promise).toBeInstanceOf(Promise);
       expect(await promise).toEqual([1, 2, 3, 4, 5])
+      clearBatch(loader.batch)
+    })
+  })
+
+  describe('batch functionality', () => {
+    it('Should show key value pairs in the batch', async () => {
+      const batch = new Cachiql(async keys => keys);
+
+      const clearBatch = (batch) => {
+        batch.hasSent = false;
+        batch.keys = [];
+        batch.cbs = [];
+      }
+
+      batch.loadAll([1, 2, 3, 4, 5, 4, 3, 2, 1])
+      expect(batch.batch.keys.length).toEqual(5);
+      expect(batch.batch.hasSent).toEqual(true);
+      clearBatch(batch.batch)
+    })
+
+    it('Should clear cache when called', () => {
+      const loader = new Cachiql(async keys => keys);
+
+      expect(loader.batch).toEqual(null)
     })
   })
 })
