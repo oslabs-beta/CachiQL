@@ -207,6 +207,7 @@ app.use(
     }
   })
 );
+const { PORT = 3000 } = process.env
 
 const uri =
   'mongodb+srv://cachiql:cache@cachiql.pypfo.mongodb.net/cachiql?retryWrites=true&w=majority';
@@ -214,7 +215,7 @@ const options = { useNewUrlParser: true, useUnifiedTopology: true };
 mongoose
   .connect(uri, options)
   .then(() =>
-    app.listen(3000, console.log('Server running with mongodb on 3000'))
+    app.listen(PORT, console.log(` New Server running with mongodb on ${PORT}`))
   )
   .catch((error) => {
     throw error;
