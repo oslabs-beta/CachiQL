@@ -63,8 +63,8 @@ const team = [
   },
   {
     name: 'Eddy Zapata',
-    linkedIn: 'https://www.linkedin.com/in/zapata124',
-    github: 'http://www.linkedin.com/in/eddy-zapata-510805203',
+    linkedIn: 'http://www.linkedin.com/in/eddy-zapata',
+    github: 'https://github.com/zapata124',
     image: Eddy
   },
   {
