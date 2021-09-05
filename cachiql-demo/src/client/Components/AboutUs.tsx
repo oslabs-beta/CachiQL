@@ -63,8 +63,8 @@ const team = [
   },
   {
     name: 'Eddy Zapata',
-    linkedIn: 'https://www.linkedin.com/in/zapata124',
-    github: 'http://www.linkedin.com/in/eddy-zapata-510805203',
+    linkedIn: 'http://www.linkedin.com/in/eddy-zapata',
+    github: 'https://github.com/zapata124',
     image: Eddy
   },
   {
@@ -81,7 +81,7 @@ export const AboutUs = () => {
   return (
     <React.Fragment>
       <Container className={classes.cardGrid}>
-        <div align="center">
+        <div align="center" id="aboutus">
           <TeamCachiql className={classes.teamIcon} />
         </div>
         <Grid container spacing={5}>
@@ -106,7 +106,6 @@ export const AboutUs = () => {
                     <GitHubIcon fontSize="large" />
                   </IconButton>
                 </div>
-
               </Card>
             </Grid>
           ))}

@@ -79,8 +79,7 @@ export const WhyCachiQL = () => {
                   Saving Time
                 </Typography>
                 <Typography>
-                  Leveraging the power of Redis to rapidly return previously
-                  cached GraphQL queries.
+                  Reduce the amount of database round trips for nested GraphQL queries.
                 </Typography>
               </CardContent>
             </Card>

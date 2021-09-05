@@ -19,10 +19,15 @@ const cache = require('memory-cache');
 const AuthorLoader = require('./AuthorLoader');
 const BookLoader = require('./BookLoader');
 const { Cachiql } = require('./cachiql');
+const path = require('path');
 //const {AuthorType, BookType} = require('./resolvercache')
 
 let mockCounter = 0;
 let counter = 0;
+
+app.use(express.static(path.resolve(__dirname, '../../dist')))
+
+
 
 app.get('/counter', (req, res) => {
   let num = counter;
@@ -39,6 +44,8 @@ app.get('/counter', (req, res) => {
     }
   ]);
 });
+
+app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../../dist/index.html')))
 
 const AuthorType = new GraphQLObjectType({
   name: 'Author',
@@ -200,6 +207,7 @@ app.use(
     }
   })
 );
+const { PORT = 3000 } = process.env
 
 const uri =
   'mongodb+srv://cachiql:cache@cachiql.pypfo.mongodb.net/cachiql?retryWrites=true&w=majority';
@@ -207,7 +215,7 @@ const options = { useNewUrlParser: true, useUnifiedTopology: true };
 mongoose
   .connect(uri, options)
   .then(() =>
-    app.listen(3000, console.log('Server running with mongodb on 3000'))
+    app.listen(PORT, console.log(` New Server running with mongodb on ${PORT}`))
   )
   .catch((error) => {
     throw error;
