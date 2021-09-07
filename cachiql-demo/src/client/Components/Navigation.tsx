@@ -30,7 +30,13 @@ export const FloatNavigationMenuStyle = React.memo(
               <OndemandVideoIcon />
               DEMO
           </NavItem>
-          <NavItem>
+          <NavItem
+            onClick={() =>
+              window.open(
+                'https://medium.com/@vanessayplutz/deeply-understand-the-graphql-n-1-issue-and-dataloader-5a2c8b4de050'
+              )
+            }
+          >
             <RateReviewIcon />
             MEDIUM
           </NavItem>
