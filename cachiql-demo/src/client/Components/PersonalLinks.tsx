@@ -86,7 +86,7 @@ export const Linkage = () => {
             className={classes.cardMedia2}
             aria-label="Linkedin.com"
             onClick={() =>
-              window.open('http://www.linkedin.com/in/eddy-zapata-510805203')
+              window.open('https://www.linkedin.com/in/eddy-zapata/')
             }
           >
             <LinkedInIcon fontSize="large" />
