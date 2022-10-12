@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import CachiQLLogo from '../../assets/white1024.svg';
+import CachiQLLogo from '../assets/white1024.svg';
 import Paper from '@material-ui/core/Paper';
 import { Button } from '@material-ui/core';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
