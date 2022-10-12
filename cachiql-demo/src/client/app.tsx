@@ -13,7 +13,7 @@ import { Banner } from './Components/Banner';
 import { WhyCachiQL } from './Components/Cards';
 import { Demo } from './Components/Demologo';
 import Stepper from './Components/Stepper';
-import { AboutUs } from './Components/AboutUs';
+import AboutUs  from './Components/AboutUs';
 
 const useStyles = makeStyles((theme) => ({
   root: {

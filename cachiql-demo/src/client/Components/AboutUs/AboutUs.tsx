@@ -6,11 +6,11 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import Kaden from '../assets/resizedKaden-svg.svg';
-import Vanessa from '../assets/resizedVanessa-svg.svg';
-import Eddy from '../assets/resizedEddy-svg.svg';
-import Fahad from '../assets/resizedFahad-svg.svg';
-import TeamCachiql from '../assets/teamCachiql.svg';
+// import Kaden from '../assets/resizedKaden-svg.svg';
+// import Vanessa from '../assets/resizedVanessa-svg.svg';
+// import Eddy from '../assets/resizedEddy-svg.svg';
+// import Fahad from '../assets/resizedFahad-svg.svg';
+// import TeamCachiql from '../assets/teamCachiql.svg';
 import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -53,42 +53,42 @@ const team = [
     name: 'Kaden Johnson',
     linkedIn: 'https://www.linkedin.com/in/kaden-johnson/',
     github: 'https://github.com/Kadenj117',
-    image: Kaden
+    // image: Kaden
   },
   {
     name: 'Vanessa Lutz',
     linkedIn: 'https://www.linkedin.com/in/vanessa-lutz/',
     github: 'https://github.com/vanessalutz',
-    image: Vanessa
-  },
-  {
-    name: 'Eddy Zapata',
-    linkedIn: 'http://www.linkedin.com/in/eddy-zapata',
-    github: 'https://github.com/zapata124',
-    image: Eddy
-  },
-  {
-    name: 'Fahad Shaikh',
-    linkedIn: 'https://www.linkedin.com/in/fahadmshaikh/',
-    github: 'https://github.com/fahdie',
-    image: Fahad
+    // image: Vanessa
   }
+  // {
+  //   name: 'Eddy Zapata',
+  //   linkedIn: 'http://www.linkedin.com/in/eddy-zapata',
+  //   github: 'https://github.com/zapata124',
+  //   image: Eddy
+  // },
+  // {
+  //   name: 'Fahad Shaikh',
+  //   linkedIn: 'https://www.linkedin.com/in/fahadmshaikh/',
+  //   github: 'https://github.com/fahdie',
+  //   image: Fahad
+  // }
 ];
 
-export const AboutUs = () => {
+const AboutUs = () => {
   const classes = useStyles();
   const [cards, setCards] = useState(team);
   return (
     <React.Fragment>
       <Container className={classes.cardGrid}>
-        <div align="center" id="aboutus">
+        {/* <div align="center" id="aboutus">
           <TeamCachiql className={classes.teamIcon} />
-        </div>
+        </div> */}
         <Grid container spacing={5}>
           {cards.map((card, i) => (
             <Grid item key={i} xs={6} sm={3} md={3}>
               <Card className={classes.card}>
-                {<card.image className={classes.cardMedia} />}
+                {/* {<card.image className={classes.cardMedia} />} */}
                 <Typography variant="h5">{card.name}</Typography>
                 <div>
                   <IconButton
@@ -114,3 +114,5 @@ export const AboutUs = () => {
     </React.Fragment>
   );
 };
+
+export default AboutUs;
