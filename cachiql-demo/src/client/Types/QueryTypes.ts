@@ -6,11 +6,3 @@ export interface QueryResult {
   added: boolean;
   cleared: boolean;
 }
-
-// export interface CachedResult {
-//     runTime: number;
-// }
-
-// export interface UncachedResult {
-
-// }
