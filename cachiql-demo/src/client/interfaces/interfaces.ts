@@ -1,3 +1,8 @@
+export interface MemberType {
+  name: string;
+  image: string;
+}
+
 export interface QueryResult {
   label: string;
   queryResult: any;
