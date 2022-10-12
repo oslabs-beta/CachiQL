@@ -3,94 +3,35 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import Card from '@material-ui/core/Card';
 import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-// import Kaden from '../assets/resizedKaden-svg.svg';
-// import Vanessa from '../assets/resizedVanessa-svg.svg';
-// import Eddy from '../assets/resizedEddy-svg.svg';
-// import Fahad from '../assets/resizedFahad-svg.svg';
-// import TeamCachiql from '../assets/teamCachiql.svg';
-import { Grid } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8)
-  },
-  card: {
-    paddingTop: '5%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  cardMedia: {
-    borderRadius: '50%' // 16:9
-  },
-  cardContent: {
-    flexGrow: 1,
-    justifyContent: 'center'
-  },
-  svgIcon: {
-    transform: 'scale(1.0)'
-  },
-  cardMedia2: {
-    borderRadius: '50%',
-    margin: '10px'
-  },
-  container: {
-    paddingTop: '10px',
-    alignContent: 'space-between'
-  },
-  teamIcon: {
-    transform: 'scale(0.7)'
-  }
-}));
-
-const team = [
-  {
-    name: 'Kaden Johnson',
-    linkedIn: 'https://www.linkedin.com/in/kaden-johnson/',
-    github: 'https://github.com/Kadenj117',
-    // image: Kaden
-  },
-  {
-    name: 'Vanessa Lutz',
-    linkedIn: 'https://www.linkedin.com/in/vanessa-lutz/',
-    github: 'https://github.com/vanessalutz',
-    // image: Vanessa
-  }
-  // {
-  //   name: 'Eddy Zapata',
-  //   linkedIn: 'http://www.linkedin.com/in/eddy-zapata',
-  //   github: 'https://github.com/zapata124',
-  //   image: Eddy
-  // },
-  // {
-  //   name: 'Fahad Shaikh',
-  //   linkedIn: 'https://www.linkedin.com/in/fahadmshaikh/',
-  //   github: 'https://github.com/fahdie',
-  //   image: Fahad
-  // }
-];
+import TeamCachiql from '../../assets/teamCachiql.svg';
+import { Box, Grid } from '@material-ui/core';
+import { useStyles } from './styles';
+import { teamMembers } from './members';
 
 const AboutUs = () => {
   const classes = useStyles();
-  const [cards, setCards] = useState(team);
+  const [cards, setCards] = useState(teamMembers);
   return (
-    <React.Fragment>
+    <>
       <Container className={classes.cardGrid}>
-        {/* <div align="center" id="aboutus">
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+          id="aboutus"
+        >
           <TeamCachiql className={classes.teamIcon} />
-        </div> */}
+        </Box>
         <Grid container spacing={5}>
-          {cards.map((card, i) => (
+          {cards.map((card: any, i) => (
             <Grid item key={i} xs={6} sm={3} md={3}>
               <Card className={classes.card}>
-                {/* {<card.image className={classes.cardMedia} />} */}
+                <card.imageLarge className={classes.cardMedia} />
                 <Typography variant="h5">{card.name}</Typography>
-                <div>
+                <Box>
                   <IconButton
                     className={classes.cardMedia2}
                     aria-label="Linkedin.com"
@@ -105,13 +46,13 @@ const AboutUs = () => {
                   >
                     <GitHubIcon fontSize="large" />
                   </IconButton>
-                </div>
+                </Box>
               </Card>
             </Grid>
           ))}
         </Grid>
       </Container>
-    </React.Fragment>
+    </>
   );
 };
 
