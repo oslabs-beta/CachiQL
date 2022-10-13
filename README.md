@@ -1,4 +1,4 @@
-![Alt text](./cachiql-demo/src/assets/cachiqlWhiteLogo.svg)
+![Alt text](./cachiql-demo/src/client/assets/cachiqlWhiteLogo.svg)
 
 # About CachiQL
 
