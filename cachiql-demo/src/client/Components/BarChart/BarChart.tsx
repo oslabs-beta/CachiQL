@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import { TitleGraph } from './TitleGraph';
+import { TitleGraph } from '../TitleGraph';
 import {
   BarChart,
   Bar,
@@ -8,7 +8,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend
+  Legend,
 } from 'recharts';
 
 const BarStyle = styled.div`
@@ -21,7 +21,7 @@ interface Props {
   setRecentQueries: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
-export const BuildBarChart: React.FC<Props> = ({ recentQueries, setRecentQueries }) => {
+const BarChartComp: React.FC<Props> = ({ recentQueries, setRecentQueries }) => {
   return (
     <>
       <TitleGraph>CachiQL Results</TitleGraph>
@@ -34,7 +34,7 @@ export const BuildBarChart: React.FC<Props> = ({ recentQueries, setRecentQueries
             top: 5,
             right: 30,
             left: 20,
-            bottom: 5
+            bottom: 5,
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
@@ -49,3 +49,5 @@ export const BuildBarChart: React.FC<Props> = ({ recentQueries, setRecentQueries
     </>
   );
 };
+
+export default BarChartComp;
