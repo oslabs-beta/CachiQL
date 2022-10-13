@@ -12,7 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Kaden from '../../assets/resizedKaden-svg.svg';
 import Vanessa from '../../assets/resizedVanessa-svg.svg';
-import Eddie from '../../assets/resizedEddie-svg.svg';
+import Eddie from '../../assets/resizedEddy-svg.svg';
 import Fahad from '../../assets/resizedFahad-svg.svg';
 
 const useStyles = makeStyles((theme) => ({

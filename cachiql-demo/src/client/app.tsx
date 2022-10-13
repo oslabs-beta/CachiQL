@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FloatNavigationMenuStyle } from './Components/Navigation';
 import { Graphiql } from './Components/GraphiQL';
-import { BuildBarChart } from './Components/BarChart';
+import BarChartComp from './Components/BarChart';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,32 +9,32 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import { Metrics } from './Components/Metrics';
 import clsx from 'clsx';
-import { Banner } from './Components/Banner';
+import Banner from './Components/Banner';
 import { WhyCachiQL } from './Components/Cards';
 import { Demo } from './Components/Demologo';
 import Stepper from './Components/Stepper';
-import { AboutUs } from './Components/AboutUs';
+import AboutUs from './Components/AboutUs';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex'
+    display: 'flex',
   },
   container: {
     paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4)
+    paddingBottom: theme.spacing(4),
   },
   paper: {
     padding: theme.spacing(2),
     display: 'flex',
     overflow: 'auto',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   fixedHeight: {
-    height: 380
+    height: 380,
   },
   metrics: {
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 }));
 
 const App: React.FC = () => {
@@ -64,7 +64,7 @@ const App: React.FC = () => {
           {/* BuildBarChart */}
           <Grid item xs={12} md={8} lg={9}>
             <Paper className={fixedHeightPaper}>
-              <BuildBarChart {...{ recentQueries, setRecentQueries }} />
+              <BarChartComp {...{ recentQueries, setRecentQueries }} />
             </Paper>
           </Grid>
           {/* Metrics */}
