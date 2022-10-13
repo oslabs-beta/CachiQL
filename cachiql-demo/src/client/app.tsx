@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import { Metrics } from './Components/Metrics';
 import clsx from 'clsx';
-import { Banner } from './Components/Banner';
+import Banner  from './Components/Banner';
 import { WhyCachiQL } from './Components/Cards';
 import { Demo } from './Components/Demologo';
 import Stepper from './Components/Stepper';
