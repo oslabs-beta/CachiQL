@@ -10,33 +10,39 @@ import AutorenewIcon from '@material-ui/icons/Autorenew';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import CodeIcon from '@material-ui/icons/Code';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   cardGrid: {
     paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8)
+    paddingBottom: theme.spacing(8),
   },
   card: {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    alignContent: 'center'
+    alignContent: 'center',
   },
   cardMedia: {
-    paddingTop: '56.25%' // 16:9
+    paddingTop: '56.25%', // 16:9
   },
   cardContent: {
-    flexGrow: 1
+    flexGrow: 1,
+  },
+  cardContent1: {
+    flexGrow: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   playIcon: {
     display: 'flex',
     alignItems: 'center',
     height: 50,
-    width: 50
+    width: 50,
   },
 }));
 
-export const WhyCachiQL = () => {
+const WhyCachiQL = () => {
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -45,10 +51,10 @@ export const WhyCachiQL = () => {
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <Card className={classes.card}>
-              <CardContent className={classes.cardContent}>
-              <Typography variant="h2" component="h2" fontWeight="bold" emphasis="high">
+              <CardContent className={classes.cardContent1}>
+                <Typography variant="h2">
                   SOLVING THE N+1 ISSUE OF GRAPHQL
-              </Typography>
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
@@ -79,7 +85,8 @@ export const WhyCachiQL = () => {
                   Saving Time
                 </Typography>
                 <Typography>
-                  Reduce the amount of database round trips for nested GraphQL queries.
+                  Reduce the amount of database round trips for nested GraphQL
+                  queries.
                 </Typography>
               </CardContent>
             </Card>
@@ -103,3 +110,5 @@ export const WhyCachiQL = () => {
     </React.Fragment>
   );
 };
+
+export default WhyCachiQL;

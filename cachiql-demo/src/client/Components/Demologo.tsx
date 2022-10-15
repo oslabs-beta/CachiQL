@@ -4,10 +4,10 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import CQDemoLogo from '../../assets/whitedemo1024.svg';
-import CQDemo from '../../assets/cachiqlDemo.png';
+import CQDemo from '../../client/assets/cachiqlDemo.png';
 import Sparkle from 'react-sparkle';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   mainFeaturedPost: {
     position: 'relative',
     background: 'linear-gradient(#111425,#3751e0)',
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(4),
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
   },
   overlay: {
     position: 'absolute',
@@ -23,20 +23,20 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     right: 0,
     left: 0,
-    backgroundColor: 'linear-gradient(#111425,#3751e0)'
+    backgroundColor: 'linear-gradient(#111425,#3751e0)',
   },
   svg_demo: {
     transform: 'scale(1.0)',
-    position: 'relative'
+    position: 'relative',
   },
   mainFeaturedPostContent: {
     position: 'relative',
     padding: theme.spacing(3),
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(6),
-      paddingRight: 0
-    }
-  }
+      paddingRight: 0,
+    },
+  },
 }));
 
 export const Demo = () => {
@@ -44,7 +44,7 @@ export const Demo = () => {
 
   return (
     <Paper className={classes.mainFeaturedPost}>
-      <div className={classes.overlay} id='demo' />
+      <div className={classes.overlay} id="demo" />
       <Sparkle />
 
       <Grid container>
@@ -59,7 +59,8 @@ export const Demo = () => {
               Experience Magical CachiQL
             </Typography>
             <Typography variant="h5" color="inherit" paragraph>
-              Take a look at all that CachiQL has to offer by using GraphiQL to make a query.
+              Take a look at all that CachiQL has to offer by using GraphiQL to
+              make a query.
             </Typography>
           </div>
         </Grid>
