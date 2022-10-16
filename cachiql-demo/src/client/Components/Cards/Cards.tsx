@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   playIcon: {
     display: 'flex',
@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 const WhyCachiQL = () => {
   const classes = useStyles();
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       <Container className={classes.cardGrid} maxWidth="lg">
         <Grid container spacing={1}>
@@ -107,7 +107,7 @@ const WhyCachiQL = () => {
           </Grid>
         </Grid>
       </Container>
-    </React.Fragment>
+    </>
   );
 };
 

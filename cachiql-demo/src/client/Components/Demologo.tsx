@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import CQDemoLogo from '../../assets/whitedemo1024.svg';
-import CQDemo from '../../client/assets/cachiqlDemo.png';
+// import CQDemo from '../../client/assets/cachiqlDemo.png';
 import Sparkle from 'react-sparkle';
 
 const useStyles = makeStyles(theme => ({
