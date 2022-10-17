@@ -11,7 +11,7 @@ import { Metrics } from './Components/Metrics';
 import clsx from 'clsx';
 import Banner from './Components/Banner';
 import WhyCachiQL from './Components/Cards/Cards';
-import { Demo } from './Components/Demologo';
+import Demologo  from './Components/Demologo';
 import Stepper from './Components/Stepper';
 import AboutUs from './Components/AboutUs';
 
@@ -52,7 +52,7 @@ const App: React.FC = () => {
       <FloatNavigationMenuStyle />
       <Banner />
       <WhyCachiQL />
-      <Demo />
+      <Demologo />
       <Graphiql {...{ recentQueries, setRecentQueries }} />
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>
