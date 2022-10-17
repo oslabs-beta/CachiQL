@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FloatNavigationMenuStyle } from './Components/Navigation';
-import { Graphiql } from './Components/GraphiQL';
+import Graphiql from './Components/GraphiQL';
 import BarChartComp from './Components/BarChart';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';

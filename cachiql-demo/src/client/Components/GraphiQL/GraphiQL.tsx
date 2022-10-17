@@ -17,14 +17,11 @@ interface Props {
   recentQueries: any[];
   setRecentQueries: React.Dispatch<React.SetStateAction<any[]>>;
 }
-export const Graphiql: React.FC<Props> = ({
-  recentQueries,
-  setRecentQueries
-}) => {
+const Graphiql: React.FC<Props> = ({ recentQueries, setRecentQueries }) => {
   const getCounter = () => {
     fetch('/counter')
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         setRecentQueries([...recentQueries, ...data] || [...recentQueries]);
       });
   };
@@ -33,15 +30,15 @@ export const Graphiql: React.FC<Props> = ({
     <Stylegraphiql>
       <div className="graphiql">
         <GraphiQL
-          fetcher={async (graphQLParams) => {
+          fetcher={async graphQLParams => {
             const data = await fetch('graphql', {
               method: 'POST',
               headers: {
                 Accept: 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
               },
               body: JSON.stringify(graphQLParams),
-              credentials: 'same-origin'
+              credentials: 'same-origin',
             });
             return data.json().catch(() => {
               data.text();
@@ -61,3 +58,5 @@ export const Graphiql: React.FC<Props> = ({
     </Stylegraphiql>
   );
 };
+
+export default Graphiql;
