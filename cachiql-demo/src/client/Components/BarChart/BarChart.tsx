@@ -10,16 +10,8 @@ import {
   Tooltip,
   Legend,
 } from 'recharts';
-
-const BarStyle = styled.div`
-  font-family: sans-serif;
-  text-align: center;
-`;
-
-interface Props {
-  recentQueries: any[];
-  setRecentQueries: React.Dispatch<React.SetStateAction<any[]>>;
-}
+import { Props } from '../../interfaces/interfaces';
+import { BarStyle } from './styles';
 
 const BarChartComp: React.FC<Props> = ({ recentQueries, setRecentQueries }) => {
   return (

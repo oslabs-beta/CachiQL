@@ -1,35 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { TitleGraph } from './TitleGraph';
+import { TitleGraph } from '../TitleGraph';
 import Sparkle from 'react-sparkle';
 import TrendingDownIcon from '@material-ui/icons/TrendingDown';
+import { Props } from '../../interfaces/interfaces';
+import { useStyles } from './styles';
 
-const useStyles = makeStyles({
-  depositContext: {
-    flex: 1,
-    paddingTop: '30px',
-    paddingBottom: '30px'
-  },
-  sparkle: {
-    position: 'relative'
-  },
-  trendIcon: {
-    display: 'flex',
-    alignItems: 'center',
-    height: 50,
-    width: 50
-  }
-});
-interface Props {
-  recentQueries: any[];
-  setRecentQueries: React.Dispatch<React.SetStateAction<any[]>>;
-}
-
-export const Metrics: React.FC<Props> = ({
-  recentQueries,
-  setRecentQueries
-}) => {
+const Metrics: React.FC<Props> = ({ recentQueries, setRecentQueries }) => {
   const classes = useStyles();
 
   return (
@@ -54,3 +32,5 @@ export const Metrics: React.FC<Props> = ({
     </React.Fragment>
   );
 };
+
+export default Metrics;

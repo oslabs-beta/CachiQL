@@ -3,20 +3,9 @@ import GraphiQL from 'graphiql';
 import styled from 'styled-components';
 import 'graphiql/graphiql.min.css';
 import { execute } from 'graphql';
+import { Stylegraphiql } from './styles'
+import { Props } from '../../interfaces/interfaces'
 
-const Stylegraphiql = styled.div`
-  margin: auto;
-  max-width: 60%;
-  margin-bottom: 25px;
-  .graphiql {
-    height: 50vh;
-  }
-`;
-
-interface Props {
-  recentQueries: any[];
-  setRecentQueries: React.Dispatch<React.SetStateAction<any[]>>;
-}
 const Graphiql: React.FC<Props> = ({ recentQueries, setRecentQueries }) => {
   const getCounter = () => {
     fetch('/counter')

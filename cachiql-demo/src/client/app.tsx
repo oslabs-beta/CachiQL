@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import { Metrics } from './Components/Metrics';
+import Metrics from './Components/Metrics';
 import clsx from 'clsx';
 import Banner from './Components/Banner';
 import WhyCachiQL from './Components/Cards/Cards';

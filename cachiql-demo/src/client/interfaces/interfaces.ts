@@ -14,3 +14,8 @@ export interface QueryResult {
   added: boolean;
   cleared: boolean;
 }
+
+export interface Props {
+  recentQueries: any[];
+  setRecentQueries: React.Dispatch<React.SetStateAction<any[]>>;
+}
