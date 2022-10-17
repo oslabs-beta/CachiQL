@@ -10,7 +10,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { Link } from '@material-ui/core';
 
 
-export const FloatNavigationMenuStyle = React.memo(
+const FloatNavigationMenuStyle = React.memo(
   function FloatNavigationMenu() {
     return (
       <>
@@ -49,3 +49,5 @@ export const FloatNavigationMenuStyle = React.memo(
     );
   }
 );
+
+export default FloatNavigationMenuStyle;
