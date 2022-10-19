@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import { TitleGraph } from '../TitleGraph';
+import TitleGraph from '../TItleGraph/TitleGraph';
 import {
   BarChart,
   Bar,

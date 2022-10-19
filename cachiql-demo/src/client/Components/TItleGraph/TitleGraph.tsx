@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 
-export const TitleGraph = (props) => {
+const TitleGraph = (props: any) => {
   return (
     <Typography component="h2" variant="h6" color="primary" gutterBottom>
       {props.children}
@@ -10,6 +10,4 @@ export const TitleGraph = (props) => {
   );
 };
 
-TitleGraph.propTypes = {
-  children: PropTypes.node
-};
+export default TitleGraph;
