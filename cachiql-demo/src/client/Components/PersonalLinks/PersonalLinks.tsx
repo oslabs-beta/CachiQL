@@ -3,55 +3,15 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import Card from '@material-ui/core/Card';
 import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
-// import Typography from '@material-ui/core/Typography';
-// import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
-// import Avatar from '@material-ui/core/Avatar';
-// import { Avatars } from './Avatars';
 import Typography from '@material-ui/core/Typography';
 import Kaden from '../../assets/resizedKaden-svg.svg';
 import Vanessa from '../../assets/resizedVanessa-svg.svg';
-import Eddie from '../../assets/resizedEddy-svg.svg';
+import Eddy from '../../assets/resizedEddy-svg.svg';
 import Fahad from '../../assets/resizedFahad-svg.svg';
+import { useStyles } from './styles';
 
-const useStyles = makeStyles((theme) => ({
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8)
-  },
-  card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    alignContent: 'center'
-  },
-  cardMedia: {
-    paddingTop: '56.25%' // 16:9
-  },
-  cardContent: {
-    flexGrow: 1
-  },
-  svgIcon: {
-    transform: 'scale(1.0)'
-  },
-  cardMedia: {
-    borderRadius: '50%',
-    margin: '28px'
-  },
-  cardMedia2: {
-    borderRadius: '50%',
-    margin: '38px',
-    paddingRight: '81px'
-  },
-  container: {
-    paddingTop: '20px',
-    alignContent: 'space-between'
-  }
-}));
-
-export const Linkage = () => {
+const PersonalLinks = () => {
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -60,7 +20,7 @@ export const Linkage = () => {
           <Kaden className={classes.cardMedia} />
           <Typography>Kaden Johnson</Typography>
           <Vanessa className={classes.cardMedia} />
-          <Eddie className={classes.cardMedia} />
+          <Eddy className={classes.cardMedia} />
           <Fahad className={classes.cardMedia} />
         </Card>
         <Card>
@@ -135,3 +95,5 @@ export const Linkage = () => {
     </React.Fragment>
   );
 };
+
+export default PersonalLinks;

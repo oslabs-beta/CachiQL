@@ -11,8 +11,8 @@ import Metrics from './Components/Metrics';
 import clsx from 'clsx';
 import Banner from './Components/Banner';
 import WhyCachiQL from './Components/Cards/Cards';
-import Demologo  from './Components/Demologo';
-import Stepper from './Components/Stepper';
+import Demologo from './Components/Demologo';
+import VerticalStepper from './Components/Stepper';
 import AboutUs from './Components/AboutUs';
 
 const useStyles = makeStyles(theme => ({
@@ -58,7 +58,7 @@ const App: React.FC = () => {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <Stepper />
+              <VerticalStepper />
             </Paper>
           </Grid>
           {/* BuildBarChart */}

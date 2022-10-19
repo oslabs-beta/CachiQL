@@ -32,7 +32,7 @@ function getSteps() {
   ];
 }
 
-function getStepContent(step) {
+function getStepContent(step: any) {
   switch (step) {
     case 0:
       return `First, enter in a query above using the GraphiQL interface provided. Then, receive your GraphQL test queries back.`;
@@ -45,7 +45,7 @@ function getStepContent(step) {
   }
 }
 
-export default function VerticalLinearStepper() {
+export default function VerticalStepper() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
