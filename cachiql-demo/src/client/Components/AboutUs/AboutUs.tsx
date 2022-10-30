@@ -5,9 +5,15 @@ import Card from '@material-ui/core/Card';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import TeamCachiql from '../../assets/teamCachiql.svg';
-import { Container, Box, Grid } from '@mui/material';
+import { Container, Box, Grid, styled } from '@mui/material';
 import { useStyles } from './styles';
 import { teamMembers } from './members';
+
+const AboutUsBoxStyled = styled(Box)({
+  display: 'flex',
+  justifyContent: 'center',
+  id: 'aboutus'
+});
 
 const AboutUs = () => {
   const classes = useStyles();
@@ -15,15 +21,9 @@ const AboutUs = () => {
   return (
     <>
       <Container className={classes.cardGrid}>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-          }}
-          id="aboutus"
-        >
+        <AboutUsBoxStyled>
           <TeamCachiql className={classes.teamIcon} />
-        </Box>
+        </AboutUsBoxStyled>
         <Grid container spacing={5}>
           {cards.map((card: any, i) => (
             <Grid item key={i} xs={6} sm={3} md={3}>
