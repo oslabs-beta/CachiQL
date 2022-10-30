@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-
+import { styled, Box, Card } from '@mui/material';
 export const useStyles = makeStyles(theme => ({
   cardGrid: {
     paddingTop: theme.spacing(8),
@@ -34,3 +34,15 @@ export const useStyles = makeStyles(theme => ({
     transform: 'scale(0.7)',
   },
 }));
+
+export const AboutUsBoxStyled = styled(Box)({
+  display: 'flex',
+  justifyContent: 'center',
+  id: 'aboutus',
+});
+export const CardStyled = styled(Card)({
+  textAlign: 'center',
+  '.MuiCardActions-root': {
+    justifyContent: 'center',
+  },
+});
