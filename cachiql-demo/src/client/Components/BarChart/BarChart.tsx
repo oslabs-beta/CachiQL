@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import React from 'react';
 import TitleGraph from '../TItleGraph/TitleGraph';
 import {
@@ -13,7 +12,7 @@ import {
 import { Props } from '../../interfaces/interfaces';
 import { BarStyle } from './styles';
 
-const BarChartComp: React.FC<Props> = ({ recentQueries, setRecentQueries }) => {
+const BarChartComp: React.FC<Props> = ({ recentQueries }: any) => {
   return (
     <>
       <TitleGraph>CachiQL Results</TitleGraph>

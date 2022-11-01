@@ -25,8 +25,6 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
   },
   playIcon: {
-    display: 'flex',
-    alignItems: 'center',
     height: 50,
     width: 50,
   },
