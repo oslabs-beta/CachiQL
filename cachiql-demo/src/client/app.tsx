@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FloatNavigationMenuStyle from './Components/Navigation';
 import Graphiql from './Components/GraphiQL';
 import BarChartComp from './Components/BarChart';

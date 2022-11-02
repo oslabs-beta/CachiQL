@@ -11,12 +11,12 @@ import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import CodeIcon from '@material-ui/icons/Code';
 import { useStyles } from './styles';
 
-const Cards = ({ children }: any) => {
-  const classes = useStyles();
-  <Card className={classes.card}>
-    <CardContent className={classes.cardContent}>{children}</CardContent>
-  </Card>;
-};
+// const Cards = ({ children }: any) => {
+//   const classes = useStyles();
+//   <Card className={classes.card}>
+//     <CardContent className={classes.cardContent}>{children}</CardContent>
+//   </Card>;
+// };
 
 const ContentCards: React.FC = () => {
   const classes = useStyles();

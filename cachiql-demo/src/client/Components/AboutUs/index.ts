@@ -1,1 +1,2 @@
-export { default } from './AboutUs'
+export { default } from './AboutUs';
+export { teamMembers } from './members';

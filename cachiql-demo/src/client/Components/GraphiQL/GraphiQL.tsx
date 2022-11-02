@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import GraphiQL from 'graphiql';
-import styled from 'styled-components';
 import 'graphiql/graphiql.min.css';
-import { execute } from 'graphql';
 import { Stylegraphiql } from './styles'
 import { Props } from '../../interfaces/interfaces'
 

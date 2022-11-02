@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TitleGraph from '../TItleGraph/TitleGraph';
 import Sparkle from 'react-sparkle';
@@ -7,7 +6,7 @@ import TrendingDownIcon from '@material-ui/icons/TrendingDown';
 import { Props } from '../../interfaces/interfaces';
 import { useStyles } from './styles';
 
-const Metrics: React.FC<Props> = ({ recentQueries, setRecentQueries }) => {
+const Metrics: React.FC<Props> = ({ recentQueries }) => {
   const classes = useStyles();
 
   return (

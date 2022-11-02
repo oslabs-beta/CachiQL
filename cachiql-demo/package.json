@@ -62,6 +62,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
+    "react-id-generator": "^3.0.2",
     "react-router-hash-link": "^2.4.3",
     "react-sparkle": "^1.0.8",
     "recharts": "^2.0.10",

@@ -10,7 +10,7 @@ const {
   GraphQLList,
   GraphQLInt,
   GraphQLNonNull,
-  GraphQLID
+  GraphQLID,
 } = require('graphql');
 const Author = require('./models/author');
 const Book = require('./models/book');
@@ -25,9 +25,7 @@ const path = require('path');
 let mockCounter = 0;
 let counter = 0;
 
-app.use(express.static(path.resolve(__dirname, '../../dist')))
-
-
+app.use(express.static(path.resolve(__dirname, '../../dist')));
 
 app.get('/counter', (req, res) => {
   let num = counter;
@@ -40,12 +38,14 @@ app.get('/counter', (req, res) => {
     {
       name: 'Query Results',
       GraphQL: res.locals.mockNum,
-      CachiQL: res.locals.num
-    }
+      CachiQL: res.locals.num,
+    },
   ]);
 });
 
-app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../../dist/index.html')))
+app.get('*', (req, res) =>
+  res.sendFile(path.resolve(__dirname, '../../dist/index.html'))
+);
 
 const AuthorType = new GraphQLObjectType({
   name: 'Author',
@@ -79,9 +79,9 @@ const AuthorType = new GraphQLObjectType({
 
           return arr;
         }
-      }
-    }
-  })
+      },
+    },
+  }),
 });
 
 const BookType = new GraphQLObjectType({
@@ -109,9 +109,9 @@ const BookType = new GraphQLObjectType({
 
           return await Author.findOne({ books: book._id });
         }
-      }
-    }
-  })
+      },
+    },
+  }),
 });
 
 const RootQueryType = new GraphQLObjectType({
@@ -123,14 +123,14 @@ const RootQueryType = new GraphQLObjectType({
       type: BookType,
       description: 'A single Book',
       args: {
-        id: { type: GraphQLID }
+        id: { type: GraphQLID },
       },
       //db query instead to get this
       resolve: async (parent, args) => {
         let fetched = await Book.findById(args.id);
         counter += 1;
         return fetched;
-      }
+      },
     },
     books: {
       type: new GraphQLList(BookType),
@@ -142,8 +142,8 @@ const RootQueryType = new GraphQLObjectType({
         counter += 1;
         mockCounter += 1;
         let keys = [];
-        fetched.forEach((key) => keys.push(key.Author));
-        console.log(context.cachedData);
+        fetched.forEach(key => keys.push(key.Author));
+        console.log(context.cachedData, 'cachedData');
 
         context.cachedData = await context.authorLoader.loadAll(keys);
         if (context.cachedData.length !== 0) {
@@ -153,19 +153,19 @@ const RootQueryType = new GraphQLObjectType({
         console.log('mockCounter', mockCounter);
         setTimeout(() => (context.cachedData = []), 0);
         return fetched;
-      }
+      },
     },
     author: {
       type: AuthorType,
       description: 'A Single Author',
       args: {
-        id: { type: GraphQLID }
+        id: { type: GraphQLID },
       },
       //query db in resolve instead of returning the books object
       resolve: async (parent, args) => {
         counter += 1;
         return Author.findOne({ _id: args.id });
-      }
+      },
     },
     authors: {
       type: new GraphQLList(AuthorType),
@@ -176,7 +176,7 @@ const RootQueryType = new GraphQLObjectType({
         counter += 1;
         mockCounter += 1;
         let keys = [];
-        fetched.forEach((key) => keys.push(...key.books));
+        fetched.forEach(key => keys.push(...key.books));
         mockCounter += keys.length;
 
         context.cachedData = await context.bookLoader.loadAll(keys);
@@ -186,13 +186,13 @@ const RootQueryType = new GraphQLObjectType({
 
         console.log(mockCounter);
         return fetched;
-      }
-    }
-  })
+      },
+    },
+  }),
 });
 
 const schema = new GraphQLSchema({
-  query: RootQueryType
+  query: RootQueryType,
 });
 
 app.use(
@@ -203,11 +203,11 @@ app.use(
     context: {
       authorLoader: new Cachiql(AuthorLoader),
       bookLoader: new Cachiql(BookLoader),
-      cachedData: []
-    }
+      cachedData: [],
+    },
   })
 );
-const { PORT = 3000 } = process.env
+const { PORT = 3000 } = process.env;
 
 const uri =
   'mongodb+srv://cachiql:cache@cachiql.pypfo.mongodb.net/cachiql?retryWrites=true&w=majority';
@@ -217,6 +217,6 @@ mongoose
   .then(() =>
     app.listen(PORT, console.log(` New Server running with mongodb on ${PORT}`))
   )
-  .catch((error) => {
+  .catch(error => {
     throw error;
   });
