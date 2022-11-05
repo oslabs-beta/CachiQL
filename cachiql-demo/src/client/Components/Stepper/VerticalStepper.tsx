@@ -45,7 +45,7 @@ export default function VerticalStepper() {
   const handleReset = () => {
     setActiveStep(0);
   };
-
+// this componet can be modularize
   return (
     <div className={classes.root}>
       <Stepper activeStep={activeStep} orientation="vertical">
