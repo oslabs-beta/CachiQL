@@ -3,7 +3,7 @@ import GraphiQL from 'graphiql';
 import 'graphiql/graphiql.min.css';
 import { Stylegraphiql } from './styles'
 import { Props } from '../../interfaces/interfaces'
-
+import { ApolloSandbox } from '@apollo/sandbox/react';
 const Graphiql: React.FC<Props> = ({ recentQueries, setRecentQueries }) => {
   const getCounter = () => {
     fetch('/counter')
@@ -41,6 +41,10 @@ const Graphiql: React.FC<Props> = ({ recentQueries, setRecentQueries }) => {
             />
           </GraphiQL.Toolbar>
         </GraphiQL>
+           {/* <ApolloSandbox
+      initialEndpoint='http://localhost:3000'
+      includeCookies={false}
+    /> */}
       </div>
     </Stylegraphiql>
   );

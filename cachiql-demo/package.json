@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/oslabs-beta/CachiQL#readme",
   "dependencies": {
+    "@apollo/explorer": "^2.0.2",
+    "@apollo/sandbox": "^1.0.3",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
