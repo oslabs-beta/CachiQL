@@ -106,7 +106,7 @@ const BookType = new GraphQLObjectType({
             }
           }
           counter += 1;
-
+          
           return await Author.findOne({ books: book._id });
         }
       },
@@ -144,7 +144,7 @@ const RootQueryType = new GraphQLObjectType({
         let keys = [];
         fetched.forEach(key => keys.push(key.Author));
         console.log(context.cachedData, 'cachedData');
-
+        
         context.cachedData = await context.authorLoader.loadAll(keys);
         if (context.cachedData.length !== 0) {
           counter += 1;
@@ -178,12 +178,12 @@ const RootQueryType = new GraphQLObjectType({
         let keys = [];
         fetched.forEach(key => keys.push(...key.books));
         mockCounter += keys.length;
-
+        
         context.cachedData = await context.bookLoader.loadAll(keys);
         if (context.cachedData.length !== 0) {
           counter += 1;
         }
-
+        
         console.log(mockCounter);
         return fetched;
       },
@@ -206,16 +206,16 @@ app.use(
       cachedData: [],
     },
   })
-);
-const { PORT = 3000 } = process.env;
-
-const uri =
+  );
+  const { PORT = 3000 } = process.env;
+  
+  const uri =
   'mongodb+srv://cachiql:cache@cachiql.pypfo.mongodb.net/cachiql?retryWrites=true&w=majority';
-const options = { useNewUrlParser: true, useUnifiedTopology: true };
-mongoose
+  const options = { useNewUrlParser: true, useUnifiedTopology: true };
+  mongoose
   .connect(uri, options)
   .then(() =>
-    app.listen(PORT, console.log(` New Server running with mongodb on ${PORT}`))
+  app.listen(PORT, console.log(` New Server running with mongodb on ${PORT}`))
   )
   .catch(error => {
     throw error;
