@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /*eslint-disable*/
 
-const express = require('express');
+// const express = require('express');
 const mongoose = require('mongoose');
 const { graphqlHTTP } = require('express-graphql');
 const {
@@ -14,18 +15,31 @@ const {
 } = require('graphql');
 const Author = require('./models/author');
 const Book = require('./models/book');
-const app = express();
-const cache = require('memory-cache');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
 const AuthorLoader = require('./AuthorLoader');
 const BookLoader = require('./BookLoader');
 const { Cachiql } = require('./cachiql');
-const path = require('path');
-//const {AuthorType, BookType} = require('./resolvercache')
-
 let mockCounter = 0;
 let counter = 0;
+const uri =
+  'mongodb+srv://cachiql:cache@cachiql.pypfo.mongodb.net/cachiql?retryWrites=true&w=majority';
+const options = { useNewUrlParser: true, useUnifiedTopology: true };
+mongoose
+  .connect(uri, options)
+const app = express();
 
-app.use(express.static(path.resolve(__dirname, '../../dist')));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+app.use(express.static(path.resolve(__dirname, '../../dist')))
 
 app.get('/counter', (req, res) => {
   let num = counter;
@@ -42,10 +56,6 @@ app.get('/counter', (req, res) => {
     },
   ]);
 });
-
-app.get('*', (req, res) =>
-  res.sendFile(path.resolve(__dirname, '../../dist/index.html'))
-);
 
 const AuthorType = new GraphQLObjectType({
   name: 'Author',
@@ -106,7 +116,7 @@ const BookType = new GraphQLObjectType({
             }
           }
           counter += 1;
-          
+
           return await Author.findOne({ books: book._id });
         }
       },
@@ -144,7 +154,7 @@ const RootQueryType = new GraphQLObjectType({
         let keys = [];
         fetched.forEach(key => keys.push(key.Author));
         console.log(context.cachedData, 'cachedData');
-        
+
         context.cachedData = await context.authorLoader.loadAll(keys);
         if (context.cachedData.length !== 0) {
           counter += 1;
@@ -178,12 +188,12 @@ const RootQueryType = new GraphQLObjectType({
         let keys = [];
         fetched.forEach(key => keys.push(...key.books));
         mockCounter += keys.length;
-        
+
         context.cachedData = await context.bookLoader.loadAll(keys);
         if (context.cachedData.length !== 0) {
           counter += 1;
         }
-        
+
         console.log(mockCounter);
         return fetched;
       },
@@ -206,17 +216,58 @@ app.use(
       cachedData: [],
     },
   })
-  );
-  const { PORT = 3000 } = process.env;
+);
+app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../../dist/index.html')))
+
+
+app.use(function (err, req, res, next) {
   
-  const uri =
-  'mongodb+srv://cachiql:cache@cachiql.pypfo.mongodb.net/cachiql?retryWrites=true&w=majority';
-  const options = { useNewUrlParser: true, useUnifiedTopology: true };
-  mongoose
-  .connect(uri, options)
-  .then(() =>
-  app.listen(PORT, console.log(` New Server running with mongodb on ${PORT}`))
-  )
-  .catch(error => {
-    throw error;
-  });
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+var debug = require('debug')('expressapp:server');
+var http = require('http');
+
+
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+
+
+var server = http.createServer(app);
+
+
+server.listen(port);
+
+server.on('listening', onListening);
+
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
+module.exports = app;
